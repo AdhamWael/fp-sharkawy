@@ -1225,6 +1225,9 @@ svg.world .focused {
 }
 /* Large Screens (1700px) */
 @media (min-width: 106.25rem) {
+   .mid{
+        font-size: 3rem;
+    }
   body {
     padding-top: 4.375rem;
   }
@@ -1360,6 +1363,9 @@ svg.world .focused {
 
 /* Extra Large Screens (2500px) */
 @media (min-width: 156.25rem) {
+   .mid{
+        font-size: 3.5rem;
+    }
   body {
     padding-top: 5rem;
   }
@@ -1495,6 +1501,9 @@ svg.world .focused {
 
 /* Ultra Large Screens (3000px) */
 @media (min-width: 187.5rem) {
+   .mid{
+        font-size: 4rem;
+    }
   body {
     padding-top: 5.625rem;
   }
