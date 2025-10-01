@@ -1,379 +1,350 @@
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Diabetes Collaboration</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const elements = document.querySelectorAll(
-                ".fade-in, .slide-left, .slide-right, .exchange"
-            );
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Global Diabetes Collaboration</title>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const elements = document.querySelectorAll(
+                    ".fade-in, .slide-left, .slide-right, .exchange"
+                );
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("in-view");
-                        observer.unobserve(entry.target); // animate only once
-                    }
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("in-view");
+                            observer.unobserve(entry.target); // animate only once
+                        }
+                    });
+                }, {
+                    threshold: 0.2
                 });
-            }, {
-                threshold: 0.2
+
+                elements.forEach(el => observer.observe(el));
             });
 
-            elements.forEach(el => observer.observe(el));
-        });
+            function playVideoAndRedirect(event, videoFile, url) {
+                event.preventDefault();
 
-        function playVideoAndRedirect(event, videoFile, url) {
-            event.preventDefault();
+                const overlay = document.getElementById("videoOverlay");
+                const video = document.getElementById("navVideo");
+                const source = document.getElementById("videoSource");
 
-            const overlay = document.getElementById("videoOverlay");
-            const video = document.getElementById("navVideo");
-            const source = document.getElementById("videoSource");
+                console.log("Loading video:", videoFile);
 
-            console.log("Loading video:", videoFile);
+                source.src = videoFile;
+                video.load();
+                overlay.style.display = "flex";
 
-            source.src = videoFile;
-            video.load();
-            overlay.style.display = "flex";
+                video.play().then(() => {
+                    console.log("Video started playing.");
+                }).catch(err => {
+                    console.error("Video play failed:", err);
+                    window.location.href = url; // fallback redirect
+                });
 
-            video.play().then(() => {
-                console.log("Video started playing.");
-            }).catch(err => {
-                console.error("Video play failed:", err);
-                window.location.href = url; // fallback redirect
-            });
+                video.onended = function() {
+                    console.log("Video ended, redirecting to:", url);
+                    window.location.href = url;
+                };
+            }
+        </script>
+        <link rel="stylesheet" href="nav-footer.css">
+        <link rel="stylesheet" href="all.css">
 
-            video.onended = function() {
-                console.log("Video ended, redirecting to:", url);
-                window.location.href = url;
+    </head>
+
+    <body>
+        <!-- NAV -->
+        <nav class="navbar" role="navigation" aria-label="Main navigation">
+            <div class="logo">Prof. M. Sharkawy</div>
+                <!--Added hamburger menu button with three spans for animation -->
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about-2.html">About</a></li>
+                <li class="dropdown" tabindex="0">
+                    <a href="#" aria-haspopup="true">International Fellowship Programs ▾</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="kiel.html" onclick="playVideoAndRedirect(event, 'Travel/kiel-new.mp4', this.href)">Kiel</a></li>
+                        <li><a href="koln.html" onclick="playVideoAndRedirect(event, 'Travel/koln.mp4', this.href)">Köln</a></li>
+                        <li><a href="north-wales.html" onclick="playVideoAndRedirect(event, 'Travel/north wales.mp4', this.href)">North Wales</a></li>
+                        <li><a href="chennai-india.html" onclick="playVideoAndRedirect(event, 'Travel/india.mp4', this.href)">Chennai India</a></li>
+                        <li><a href="bergesch.html" onclick="playVideoAndRedirect(event, 'Travel/bergisch.mp4', this.href)">Bergisch Gladbach</a></li>
+                        <li><a href="nancy-lorraine.html" onclick="playVideoAndRedirect(event, 'Travel/nancy.mp4', this.href)">Nancy-Lorraine</a></li>
+                    </ul>
+                </li>
+                <li><a href="df-diploma.html">DF Diploma</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <section class="hero">
+            <h1>Diabetic Foot Salvage Professional Diploma</h1>
+            <h2 id="araby" class="fade-in">الدبلومة المهنيه لعلاج اصابات القدم السكري من نقابة أطباء مصر</h2>
+            <p>Organized by: <strong>Egyptian Medical Syndicate & Diabetic Foot Salvage Egyptian Foundation</strong></p>
+        </section>
+
+        <!-- Video Overlay -->
+        <div id="videoOverlay" style="display:none;">
+            <video id="navVideo" autoplay playsinline muted>
+    <source id="videoSource" src="" type="video/mp4">
+    </video>
+        </div>
+
+        <!-- COLLAB -->
+        <section id="collab" class="collab-section fade-in">
+            <div class="leader-card">
+                <img src="DF Diploma/Head-of-the-Egyptian-Medical-Syndicate-Dr.-Osama-Abdel-Hay-300x216-1.jpg" alt="Prof. Viswanathan" class="leader-photo">
+                <h3>Professor. DR. Osama Abdelhay</h3>
+                <p class="title">President Of Egyptian Medical Syndicate</p>
+                <p class="desc">M.V. Hospital for Diabetes, Royapuram, Chennai.<br>President, Prof. M. Viswanathan Diabetes Research Centre.<br><br>First Asian President of D Foot International.<br>Vice President – RSSDI.</p>
+                <div class="logo-badge"><img src="DF Diploma/Egypt-medical-syndicate-600x551.png" alt="Logo 1"></div>
+            </div>
+            <div class="center-symbol">
+                <div class="handshake">🤝</div>
+                <h2 class="project-title">Saving Limbs, Advancing Care</h2>
+                <p class="project-desc">An advanced credential organized by the Diabetic Foot Salvage Egyptian Foundation and the Egyptian Medical Syndicate, providing specialized training to save limbs and improve outcomes for diabetic patients.</p>
+            </div>
+            <div class="leader-card">
+                <img src="DF Diploma/prof-sharkawy.jpg" alt="Prof. Mohamed Sharkawy" class="leader-photo">
+                <h3>Prof. Mohamed Sharkawy</h3>
+                <p class="title">Professor of Vascular & Endovascular Surgery</p>
+                <p class="desc">Faculty of Medicine – Cairo University.<br><br>Senior Coordinator for International Cooperation & Postgraduate Training.<br>Dedicated to advancing vascular & endovascular surgery and fostering global academic collaborations.</p>
+                <div class="logo-badge"><img src="DF Diploma/ds_logo.png" alt="Logo 2"></div>
+            </div>
+        </section>
+
+        <section id="about" class="about fade-in">
+            <h2 class="title-h2">About the Collaboration</h2>
+            <div class="about-block">
+                <p>
+                    <strong>Diabetic Foot Salvage Professional Diploma</strong><br><br> Organized by the <em>Diabetic Foot Salvage Egyptian Foundation</em> &
+                    <em>Egyptian Medical Syndicate</em>, this program provides a structured pathway in diabetic foot care.<br><br>
+                    <strong>Part A – Foundations (30 weeks)</strong><br> • Open to medical graduates (≥3 years post-graduation)<br> • 60 hours: 30 theoretical + 30 clinical<br> • Includes lectures, journal clubs, M&M meetings, workshops<br><br>
+                    <strong>Part B – Advanced Limb Salvage (45 weeks)</strong><br> • Open only to postgraduates (MRCS, MRCP, Master’s, Diploma)<br> • 135 hours: 65 theoretical + 70 clinical<br> • Surgical & non-surgical tracks with hands-on exposure<br><br>
+                    <em>Graduates will gain internationally recognized certification in advanced diabetic limb salvage.</em>
+                </p>
+                <iframe height="500vh" src="https://sharkawyfp.com/wp-content/uploads/2025/08/D-foot-Professional-diploma-9Gulf-2.pdf#view=FitH"></iframe> </div>
+
+            <div class="about-block" style="margin-top: 50px;">
+                <p>Founded on shared values of scientific excellence and compassion, this collaboration bridges between Egyptians to address diabetes and vascular diseases. Since its inception, the partnership has expanded into education, innovation, and global
+                    outreach initiatives.</p><iframe height="500vh" src="https://sharkawyfp.com/wp-content/uploads/2025/08/بروتوكول-التعاون-مع-نقابة-الأطباء.pdf"></iframe></div>
+        </section>
+
+        <!-- IMPACT -->
+        <section class="impact">
+            <h2 class="title-h2">Impact Highlights</h2>
+            <div class="impact-cards">
+                <div class="impact-card">
+                    <div class="icon">🦠</div>
+                    <h3>30 Weeks</h3>
+                    <p>Duration of Part A – Foundations in Diabetic Foot Care</p>
+                </div>
+                <div class="impact-card">
+                    <div class="icon">🔬</div>
+                    <h3>45 Weeks</h3>
+                    <p>Duration of Part B – Advanced Diabetic Limb Salvage</p>
+                </div>
+                <div class="impact-card">
+                    <div class="icon">⌛</div>
+                    <h3>195+ Hours</h3>
+                    <p>Combined theoretical and practical training</p>
+                </div>
+                <div class="impact-card">
+                    <div class="icon">🧪</div>
+                    <h3>10+ Modules</h3>
+                    <p>Covering wound care, revascularization, Charcot foot & more</p>
+                </div>
+                <div class="impact-card">
+                    <div class="icon">🏫</div>
+                    <h3>9 Faculty</h3>
+                    <p>Led by Prof. Mohamed Sharkawy and international experts</p>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- BOARD -->
+        <section id="board" class="board fade-in">
+            <h2 class="title-h2">Board Members</h2>
+            <div class="members">
+                <div class="member"><img src="DF Diploma/dr ayman.jpg" alt="">
+                    <h4>Prof Dr Ayman Elsamadony</h4>
+                    <p>Cairo University</p>
+                </div>
+                <div class="member"><img src="DF Diploma/dr atef.jpg" alt="">
+                    <h4>Prof Dr Atef Abdelhamid</h4>
+                    <p>Ain Shams University</p>
+                </div>
+                <div class="member"><img src="DF Diploma/dr abdelrahman.jpg" alt="">
+                    <h4>Prof Dr Abdelrahman Mohamed</h4>
+                    <p>Ain Shams University</p>
+                </div>
+                <div class="member"><img src="DF Diploma/dr ahmed.jpg" alt="">
+                    <h4>Prof Dr Ahmed Balboula</h4>
+                    <p>Cairo University</p>
+                </div>
+                <div class="member"><img src="DF Diploma/prof marwan.jpg" alt="">
+                    <h4>A. Professor Marwan Yousry.</h4>
+                    <p>Cairo University</p>
+                </div>
+            </div>
+            <div class="members">
+                <div class="member"><img src="DF Diploma/general army.jpg" alt="">
+                    <h4>General /Dr Tamer Fekry</h4>
+                    <p>Title</p>
+                </div>
+                <div class="member"><img src="DF Diploma/dr mostafa.jpg" alt="">
+                    <h4>Dr Mostafa Elshaal</h4>
+                    <p>Consultant vascular Surgeon (NID)</p>
+                </div>
+                <div class="member"><img src="DF Diploma/dr nehad.jpg" alt="">
+                    <h4>Prof Dr Nehad Ahmed Fouad.</h4>
+                    <p>Consultant Vascular Surgeon Ministry of Health</p>
+                </div>
+                <div class="member"><img src="DF Diploma/ahmed reyad.jpg" alt="">
+                    <h4>Prof Dr Ahmed Reyad</h4>
+                    <p>Cairo university</p>
+                </div>
+                <div class="member"><img src="DF Diploma/dr-ihab.jpg" alt="">
+                    <h4>Dr Ihab Nabil Hanna</h4>
+                    <p>Dean of National institute of Diabetes & Endocrinology (NID)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MESSAGE -->
+        <section class="board-section">
+            <div class="board-message">
+                <h2 class="title-h2">Message from the Board</h2>
+                <p>
+                    This diploma reflects our mission to improve outcomes in diabetic foot management through structured, internationally standardized education.
+                    <br><br> By integrating <strong>theoretical modules</strong>, <strong>clinical exposure</strong>, and
+                    <strong>hands-on workshops</strong>, participants gain the expertise to save limbs and lives. Collaboration between Egyptian and international institutions ensures graduates are prepared to lead multidisciplinary teams worldwide.
+                </p>
+        </section>
+
+        <!-- EVENTS -->
+        <section class="events">
+            <h2 class="title-h2">Program Timeline</h2>
+            <div class="events-grid">
+                <div class="event-card">
+                    <h3>Part A – Foundations</h3>
+                    <p><strong>Duration:</strong> 30 weeks<br>
+                        <strong>Hours:</strong> 60 (30 theoretical + 30 clinical)<br> Includes lectures, case presentations, and workshops.</p>
+                </div>
+                <div class="event-card">
+                    <h3>Part B – Advanced Salvage</h3>
+                    <p><strong>Duration:</strong> 45 weeks<br>
+                        <strong>Hours:</strong> 135 (65 theoretical + 70 clinical)<br> Surgical & non-surgical tracks with advanced clinical exposure.</p>
+                </div>
+            </div>
+        </section>
+
+        <!--Footer-->
+        <footer class="site-footer">
+            <div class="footer-content">
+
+                <!-- References -->
+                <div class="footer-column reveal">
+                    <h3>References</h3>
+                    <ul class="footer-list">
+                        <li><a href="https://scholar.cu.edu.eg/?q=misharkawy/publications">Scholar</a></li>
+                        <li><a href="https://orcid.org/0000-0001-6263-2554">Orcid</a></li>
+                        <li><a href="https://www.scopus.com/authid/detail.uri?authorId=57213278598">Scopus</a></li>
+                    </ul>
+                </div>
+
+                <!-- Career Highlights -->
+                <div class="footer-column reveal">
+                    <h3>Career Highlights</h3>
+                    <ul class="footer-list">
+                        <li><strong>Professor of Vascular & Endovascular Surgery</strong><br>Cairo University</li>
+                        <li><strong>Senior Coordinator</strong><br>International Cooperation & Training</li>
+                        <li><strong>Board Member</strong> – Fellowship Programs:
+                            <ul class="sub-list">
+                                <li>BCAGF – Cologne University, Germany</li>
+                                <li>FEIN – Kiel University, Germany</li>
+                                <li>VSF-NW – Betsi Cadwaladr, UK</li>
+                                <li>IDFSF – Chennai, India</li>
+                                <li>GVRF – Bergisch Gladbach, Germany</li>
+                            </ul>
+                        </li>
+                        <li>Chairman – Egyptian Vascular Academy (EVA)</li>
+                        <li>DF International Board Advisor</li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="footer-column reveal">
+                    <h3>Contact</h3>
+                    <ul class="footer-list">
+                        <li><a href="mailto:sharkawy@kasralainy.edu.eg">sharkawy@kasralainy.edu.eg</a></li>
+                        <li><a href="mailto:kiel@sharkawyfp.com">kiel@sharkawyfp.com</a></li>
+                        <li><a href="mailto:koln@sharkawyfp.com">koln@sharkawyfp.com</a></li>
+                        <li><a href="mailto:info@sharkawyfp.com">info@sharkawyfp.com</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="footer-bottom">
+                <p>© Prof. Mohamed Ibrahim Sharkawy. All Rights Reserved.</p>
+                <p>Design & Development by <a href="#">Adham Wael   Eldeeb</a></p>
+            </div>
+        </footer>
+
+
+        <!-- LIGHTBOX -->
+        <div class="lightbox" id="lightbox"><img src="" alt="Preview"></div>
+
+        <!-- BACK TO TOP -->
+        <button id="backToTop">↑</button>
+
+        <!-- JS -->
+                <script src="universal.js"></script>
+
+        <script>
+            // SCROLL ANIMATIONS
+            const faders = document.querySelectorAll('.fade-in');
+            const appearOptions = {
+                threshold: 0.2,
+                rootMargin: "0px 0px -50px 0px"
             };
-        }
-    </script>
-    <link rel="stylesheet" href="nav-footer.css">
-    <link rel="stylesheet" href="all.css">
-
-</head>
-
-<body>
-     <!-- NAV -->
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
-        <div class="logo">Prof. M. Sharkawy</div>
-            <!--Added hamburger menu button with three spans for animation -->
-  <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-navigation" aria-expanded="false">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about-2.html">About</a></li>
-            <li class="dropdown" tabindex="0">
-                <a href="#" aria-haspopup="true">International Fellowship Programs ▾</a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="kiel.html" onclick="playVideoAndRedirect(event, 'Travel/kiel-new.mp4', this.href)">Kiel</a></li>
-                    <li><a href="koln.html" onclick="playVideoAndRedirect(event, 'Travel/koln.mp4', this.href)">Köln</a></li>
-                    <li><a href="north-wales.html" onclick="playVideoAndRedirect(event, 'Travel/north wales.mp4', this.href)">North Wales</a></li>
-                    <li><a href="chennai-india.html" onclick="playVideoAndRedirect(event, 'Travel/india.mp4', this.href)">Chennai India</a></li>
-                    <li><a href="bergesch.html" onclick="playVideoAndRedirect(event, 'Travel/bergisch.mp4', this.href)">Bergisch Gladbach</a></li>
-                    <li><a href="nancy-lorraine.html" onclick="playVideoAndRedirect(event, 'Travel/nancy.mp4', this.href)">Nancy-Lorraine</a></li>
-                </ul>
-            </li>
-            <li><a href="df-diploma.html">DF Diploma</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
-
-    <section class="hero">
-        <h1>Diabetic Foot Salvage Professional Diploma</h1>
-        <h2 id="araby" class="fade-in">الدبلومة المهنيه لعلاج اصابات القدم السكري من نقابة أطباء مصر</h2>
-        <p>Organized by: <strong>Diabetic Foot Salvage Egyptian Foundation & Egyptian Medical Syndicate</strong></p>
-
-        <div class="btn-container">
-            <a href="#gallery" class="btn btn-primary">View Gallery</a>
-            <a href="#collab" class="btn btn-secondary">Learn More</a>
-        </div>
-
-        <div class="scroll-down">⬇</div>
-    </section>
-
-    <!-- Video Overlay -->
-    <div id="videoOverlay" style="display:none;">
-        <video id="navVideo" autoplay playsinline muted>
-  <source id="videoSource" src="" type="video/mp4">
-</video>
-    </div>
-
-    <!-- COLLAB -->
-    <section id="collab" class="collab-section fade-in">
-        <div class="leader-card">
-            <img src="DF Diploma/Head-of-the-Egyptian-Medical-Syndicate-Dr.-Osama-Abdel-Hay-300x216-1.jpg" alt="Prof. Viswanathan" class="leader-photo">
-            <h3>Professor. DR. Osama Abdelhay</h3>
-            <p class="title">President Of Egyptian Medical Syndicate</p>
-            <p class="desc">M.V. Hospital for Diabetes, Royapuram, Chennai.<br>President, Prof. M. Viswanathan Diabetes Research Centre.<br><br>First Asian President of D Foot International.<br>Vice President – RSSDI.</p>
-            <div class="logo-badge"><img src="DF Diploma/Egypt-medical-syndicate-600x551.png" alt="Logo 1"></div>
-        </div>
-        <div class="center-symbol">
-            <div class="handshake">🤝</div>
-            <h2 class="project-title">Saving Limbs, Advancing Care</h2>
-            <p class="project-desc">An advanced credential organized by the Diabetic Foot Salvage Egyptian Foundation and the Egyptian Medical Syndicate, providing specialized training to save limbs and improve outcomes for diabetic patients.</p>
-        </div>
-        <div class="leader-card">
-            <img src="DF Diploma/prof-sharkawy.jpg" alt="Prof. Mohamed Sharkawy" class="leader-photo">
-            <h3>Prof. Mohamed Sharkawy</h3>
-            <p class="title">Professor of Vascular & Endovascular Surgery</p>
-            <p class="desc">Faculty of Medicine – Cairo University.<br><br>Senior Coordinator for International Cooperation & Postgraduate Training.<br>Dedicated to advancing vascular & endovascular surgery and fostering global academic collaborations.</p>
-            <div class="logo-badge"><img src="DF Diploma/ds_logo.png" alt="Logo 2"></div>
-        </div>
-    </section>
-
-    <section id="about" class="about fade-in">
-        <h2>About the Collaboration</h2>
-        <div class="about-block">
-            <p>
-                <strong>Diabetic Foot Salvage Professional Diploma</strong><br><br> Organized by the <em>Diabetic Foot Salvage Egyptian Foundation</em> &
-                <em>Egyptian Medical Syndicate</em>, this program provides a structured pathway in diabetic foot care.<br><br>
-                <strong>Part A – Foundations (30 weeks)</strong><br> • Open to medical graduates (≥3 years post-graduation)<br> • 60 hours: 30 theoretical + 30 clinical<br> • Includes lectures, journal clubs, M&M meetings, workshops<br><br>
-                <strong>Part B – Advanced Limb Salvage (45 weeks)</strong><br> • Open only to postgraduates (MRCS, MRCP, Master’s, Diploma)<br> • 135 hours: 65 theoretical + 70 clinical<br> • Surgical & non-surgical tracks with hands-on exposure<br><br>
-                <em>Graduates will gain internationally recognized certification in advanced diabetic limb salvage.</em>
-            </p>
-            <iframe height="500vh" src="https://sharkawyfp.com/wp-content/uploads/2025/08/D-foot-Professional-diploma-9Gulf-2.pdf#view=FitH"></iframe> </div>
-
-        <div class="about-block" style="margin-top: 50px;">
-            <p>Founded on shared values of scientific excellence and compassion, this collaboration bridges India and Egypt to address diabetes and vascular diseases. Since its inception, the partnership has expanded into education, innovation, and global
-                outreach initiatives.</p><iframe height="500vh" src="https://sharkawyfp.com/wp-content/uploads/2025/08/بروتوكول-التعاون-مع-نقابة-الأطباء.pdf"></iframe></div>
-    </section>
-
-    <!-- IMPACT -->
-    <section class="impact">
-        <h2>Impact Highlights</h2>
-        <div class="impact-cards">
-            <div class="impact-card">
-                <div class="icon">🦠</div>
-                <h3>30 Weeks</h3>
-                <p>Duration of Part A – Foundations in Diabetic Foot Care</p>
-            </div>
-            <div class="impact-card">
-                <div class="icon">🔬</div>
-                <h3>45 Weeks</h3>
-                <p>Duration of Part B – Advanced Diabetic Limb Salvage</p>
-            </div>
-            <div class="impact-card">
-                <div class="icon">⌛</div>
-                <h3>195+ Hours</h3>
-                <p>Combined theoretical and practical training</p>
-            </div>
-            <div class="impact-card">
-                <div class="icon">🧪</div>
-                <h3>10+ Modules</h3>
-                <p>Covering wound care, revascularization, Charcot foot & more</p>
-            </div>
-            <div class="impact-card">
-                <div class="icon">🏫</div>
-                <h3>9 Faculty</h3>
-                <p>Led by Prof. Mohamed Sharkawy and international experts</p>
-            </div>
-        </div>
-        </div>
-    </section>
-
-    <!-- BOARD -->
-    <section id="board" class="board fade-in">
-        <h2>Board Members</h2>
-        <div class="members">
-            <div class="member"><img src="DF Diploma/dr ayman.jpg" alt="">
-                <h4>Prof Dr Ayman Elsamadony</h4>
-                <p>Cairo University</p>
-            </div>
-            <div class="member"><img src="DF Diploma/dr atef.jpg" alt="">
-                <h4>Prof Dr Atef Abdelhamid</h4>
-                <p>Ain Shams University</p>
-            </div>
-            <div class="member"><img src="DF Diploma/dr abdelrahman.jpg" alt="">
-                <h4>Prof Dr Abdelrahman Mohamed</h4>
-                <p>Ain Shams University</p>
-            </div>
-            <div class="member"><img src="DF Diploma/dr ahmed.jpg" alt="">
-                <h4>Prof Dr Ahmed Balboula</h4>
-                <p>Cairo University</p>
-            </div>
-            <div class="member"><img src="DF Diploma/prof marwan.jpg" alt="">
-                <h4>A. Professor Marwan Yousry.</h4>
-                <p>Cairo University</p>
-            </div>
-        </div>
-        <div class="members">
-            <div class="member"><img src="DF Diploma/general army.jpg" alt="">
-                <h4>General /Dr Tamer Fekry</h4>
-                <p>Title</p>
-            </div>
-            <div class="member"><img src="DF Diploma/dr mostafa.jpg" alt="">
-                <h4>Dr Mostafa Elshaal</h4>
-                <p>Consultant vascular Surgeon (NID)</p>
-            </div>
-            <div class="member"><img src="DF Diploma/dr nehad.jpg" alt="">
-                <h4>Prof Dr Nehad Ahmed Fouad.</h4>
-                <p>Consultant Vascular Surgeon Ministry of Health</p>
-            </div>
-            <div class="member"><img src="DF Diploma/ahmed reyad.jpg" alt="">
-                <h4>Prof Dr Ahmed Reyad</h4>
-                <p>Cairo university</p>
-            </div>
-            <div class="member"><img src="DF Diploma/dr-ihab.jpg" alt="">
-                <h4>Dr Ihab Nabil Hanna</h4>
-                <p>Dean of National institute of Diabetes & Endocrinology (NID)</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- MESSAGE -->
-    <section class="board-section">
-        <div class="board-message">
-
-            <h2>Message from the Board</h2>
-            <p>
-                This diploma reflects our mission to improve outcomes in diabetic foot management through structured, internationally standardized education.
-                <br><br> By integrating <strong>theoretical modules</strong>, <strong>clinical exposure</strong>, and
-                <strong>hands-on workshops</strong>, participants gain the expertise to save limbs and lives. Collaboration between Egyptian and international institutions ensures graduates are prepared to lead multidisciplinary teams worldwide.
-            </p>
-    </section>
-
-    <!-- EVENTS -->
-    <section class="events">
-        <h2>Program Timeline</h2>
-        <div class="events-grid">
-            <div class="event-card">
-                <h3>Part A – Foundations</h3>
-                <p><strong>Duration:</strong> 30 weeks<br>
-                    <strong>Hours:</strong> 60 (30 theoretical + 30 clinical)<br> Includes lectures, case presentations, and workshops.</p>
-            </div>
-            <div class="event-card">
-                <h3>Part B – Advanced Salvage</h3>
-                <p><strong>Duration:</strong> 45 weeks<br>
-                    <strong>Hours:</strong> 135 (65 theoretical + 70 clinical)<br> Surgical & non-surgical tracks with advanced clinical exposure.</p>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- CERTIFICATES -->
-    <section id="certificates" class="certificates fade-in">
-        <h2>Certificates</h2>
-        <div class="slider">
-            <div class="slide"><img src="/assets/images/cert1.png" alt="Certificate 1"></div>
-            <div class="slide"><img src="/assets/images/cert2.png" alt="Certificate 2"></div>
-            <div class="slide"><img src="/assets/images/cert3.png" alt="Certificate 3"></div>
-        </div>
-    </section>
-
-    <!-- GALLERY -->
-    <section id="gallery" class="gallery fade-in">
-        <h2>Gallery</h2>
-        <div class="slider">
-            <div class="slide"><img src="/assets/images/gallery1.png" alt="Gallery 1"></div>
-            <div class="slide"><img src="/assets/images/gallery2.png" alt="Gallery 2"></div>
-            <div class="slide"><img src="/assets/images/gallery3.png" alt="Gallery 3"></div>
-        </div>
-    </section>
-
-    <!--Footer-->
-    <footer class="site-footer">
-        <div class="footer-content">
-
-            <!-- References -->
-            <div class="footer-column reveal">
-                <h3>References</h3>
-                <ul class="footer-list">
-                    <li><a href="https://scholar.cu.edu.eg/?q=misharkawy/publications">Scholar</a></li>
-                    <li><a href="https://orcid.org/0000-0001-6263-2554">Orcid</a></li>
-                    <li><a href="https://www.scopus.com/authid/detail.uri?authorId=57213278598">Scopus</a></li>
-                </ul>
-            </div>
-
-            <!-- Career Highlights -->
-            <div class="footer-column reveal">
-                <h3>Career Highlights</h3>
-                <ul class="footer-list">
-                    <li><strong>Professor of Vascular & Endovascular Surgery</strong><br>Cairo University</li>
-                    <li><strong>Senior Coordinator</strong><br>International Cooperation & Training</li>
-                    <li><strong>Board Member</strong> – Fellowship Programs:
-                        <ul class="sub-list">
-                            <li>BCAGF – Cologne University, Germany</li>
-                            <li>FEIN – Kiel University, Germany</li>
-                            <li>VSF-NW – Betsi Cadwaladr, UK</li>
-                            <li>IDFSF – Chennai, India</li>
-                            <li>GVRF – Bergisch Gladbach, Germany</li>
-                        </ul>
-                    </li>
-                    <li>Chairman – Egyptian Vascular Academy (EVA)</li>
-                    <li>DF International Board Advisor</li>
-                </ul>
-            </div>
-
-            <!-- Contact -->
-            <div class="footer-column reveal">
-                <h3>Contact</h3>
-                <ul class="footer-list">
-                    <li><a href="mailto:sharkawy@kasralainy.edu.eg">sharkawy@kasralainy.edu.eg</a></li>
-                    <li><a href="mailto:kiel@sharkawyfp.com">kiel@sharkawyfp.com</a></li>
-                    <li><a href="mailto:koln@sharkawyfp.com">koln@sharkawyfp.com</a></li>
-                    <li><a href="mailto:info@sharkawyfp.com">info@sharkawyfp.com</a></li>
-                </ul>
-            </div>
-
-        </div>
-
-        <!-- Bottom Bar -->
-        <div class="footer-bottom">
-            <p>© Prof. Mohamed Ibrahim Sharkawy. All Rights Reserved.</p>
-            <p>Design & Development by <a href="#">Adham Wael   Eldeeb</a></p>
-        </div>
-    </footer>
-
-
-    <!-- LIGHTBOX -->
-    <div class="lightbox" id="lightbox"><img src="" alt="Preview"></div>
-
-    <!-- BACK TO TOP -->
-    <button id="backToTop">↑</button>
-
-    <!-- JS -->
-              <script src="universal.js"></script>
-
-    <script>
-        // SCROLL ANIMATIONS
-        const faders = document.querySelectorAll('.fade-in');
-        const appearOptions = {
-            threshold: 0.2,
-            rootMargin: "0px 0px -50px 0px"
-        };
-        const appearOnScroll = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, appearOptions);
-        faders.forEach(fader => appearOnScroll.observe(fader));
-
-        document.addEventListener("DOMContentLoaded", () => {
-            const blocks = document.querySelectorAll(".about-block");
-            const observer = new IntersectionObserver((entries) => {
+            const appearOnScroll = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add("in-view");
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
                     }
                 });
-            }, {
-                threshold: 0.2
+            }, appearOptions);
+            faders.forEach(fader => appearOnScroll.observe(fader));
+
+            document.addEventListener("DOMContentLoaded", () => {
+                const blocks = document.querySelectorAll(".about-block");
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("in-view");
+                        }
+                    });
+                }, {
+                    threshold: 0.2
+                });
+
+                blocks.forEach(block => observer.observe(block));
             });
+        </script>
+    </body>
 
-            blocks.forEach(block => observer.observe(block));
-        });
-    </script>
-</body>
-
-</html>
+    </html>

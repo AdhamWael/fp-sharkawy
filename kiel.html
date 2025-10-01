@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Diabetes Collaboration</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <style>
         /* RESET */
         
@@ -87,130 +89,6 @@
                 font-size: 1rem;
             }
         }
-        /* ===== Section Title ===== */
-        /* ===== Adjunct Professor Section ===== */
-        
-        .adjunct-section {
-            max-width: 1250px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-        
-        .adjunct-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .adjunct-header h2 {
-            font-size: 2.5rem;
-            color: var(--indigo-dye);
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-        
-        .adjunct-header p {
-            color: var(--bice-blue);
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .adjunct-content {
-            align-items: center;
-        }
-        /* Map Container */
-        
-        .adjunct-map {
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease;
-        }
-        
-        .adjunct-map:hover {
-            transform: translateY(-5px);
-        }
-        
-        .adjunct-map img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.3s ease;
-        }
-        
-        .adjunct-map:hover img {
-            transform: scale(1.02);
-        }
-        
-        .adjunct-message:hover {
-            transition: transform 0.3s ease;
-            transform: translateY(-5px);
-            transform: scale(1.02);
-        }
-        /* Message Form */
-        
-        .adjunct-message {
-            background: linear-gradient(135deg, var(--white) 0%, var(--bg-light) 100%);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(89, 165, 216, 0.2);
-        }
-        
-        .adjunct-message h3 {
-            color: var(--indigo-dye);
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            font-weight: 600;
-            text-align: center;
-        }
-        
-        .adjunct-message p {
-            color: var(--bice-blue);
-            margin-bottom: 30px;
-            text-align: center;
-            line-height: 1.6;
-        }
-        /* ===== Responsive Design ===== */
-        
-        @media (max-width: 900px) {
-            .adjunct-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .adjunct-header h2 {
-                font-size: 2rem;
-            }
-            .adjunct-message {
-                padding: 30px 25px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .adjunct-section {
-                padding: 40px 15px;
-            }
-            .adjunct-header h2 {
-                font-size: 1.8rem;
-            }
-            .adjunct-message {
-                padding: 25px 20px;
-            }
-        }
-        /* ===== Responsive ===== */
-        
-        @media (max-width: 900px) {
-            .message-section {
-                grid-template-columns: 1fr;
-            }
-            .map-container {
-                min-height: 350px;
-            }
-            .message-cards {
-                grid-template-columns: 1fr;
-            }
-        }
-
         
     /* Masonry container */
     .album {
@@ -354,13 +232,16 @@
                 University Hospital Schleswig-Holstein Campus Kiel
                 </br>
                 Full Professor of Interventional Radiology</br>
-                Faculty of Medicine - Christian-Albrechts-University Kiel
                 </br>
                 Head of Certified University Vascular Center</br>
                 Dedicated to advancing interventional radiology through innovation in vascular interventions and academic excellence.
             </p>
             <div class="btn-container">
                 <a href="https://sharkawyfp.com/wp-content/uploads/2023/06/today-CV-Schaefer-PJ-2019-04-11-2.pdf" class="btn btn-primary">Prof. Dr. Jost. Philipp Schafer CV</a>
+                <a href="DF Diploma/Adjunct-Professor-scaled.jpeg" class="btn btn-primary" data-lightbox="gallery">
+                    Adjunct Proffesor
+                </a>
+
             </div>
         </div>
 
@@ -383,7 +264,7 @@
         </div>
     </section>
     <section id="about" class="about">
-        <h2>About the Collaboration</h2>
+        <h2 class="title-h2">About the Collaboration</h2>
         <div class="about-block">
             <p>
                 University Hospital Schleswig-Holstein (UKSH) is one of Europe's largest medical centers, providing maximum and highly differentiated care. It uniquely integrates healthcare, research, and teaching to directly apply scientific findings. As the largest
@@ -400,16 +281,6 @@
                 </br><a href="https://cu.edu.eg/Home" class="btn btn-primary">Cairo University Website</a>
             </p>
             <img src="DF Diploma/Cairo uni.jpg" class="img2" alt=""></div>
-    </section>
-
-    <!-- Replace your existing message-section with this: -->
-    <section class="adjunct-section">
-            <h2>Adjunct Professor</h2>
-        <div class="adjunct-content" style="align-items: center;">
-            <!-- Map Container -->
-            <div class="adjunct-map">
-                <img src="DF Diploma/Adjunct-Professor-scaled.jpeg" alt="Adjunct Professor Certificate">
-            </div>
     </section>
 
     <!-- LIGHTBOX -->

@@ -142,7 +142,7 @@ const countries = {
     name: "Egypt",
     flag: "SVG/Egypt.svg",
     continent: "africa",
-    pin: { x: 57, y: 35 },
+    pin: { x: 57, y: 34 },
     societies: [
       "Egyptian Society of Vascular Surgery — Board Member (2000)",
       "Egyptian Society of Diabetology — Member (2002)",
@@ -152,14 +152,14 @@ const countries = {
     name: "India",
     flag: "SVG/India.svg",
     continent: "asia",
-    pin: { x: 71, y: 38 },
+    pin: { x: 71, y: 36 },
     societies: ["International Diabetic Foot Salvage Fellowship — Board Member (2019)"],
   },
   france: {
     name: "France",
     flag: "SVG/France.svg",
     continent: "europe",
-    pin: { x: 49, y: 23 },
+    pin: { x: 49.5, y: 22 },
     societies: [
       "International Union of Angiology — Member (1999)",
       "European Society for Vascular Surgery — Member (2000)",
@@ -169,14 +169,14 @@ const countries = {
     name: "Italy",
     flag: "SVG/Italy.svg",
     continent: "europe",
-    pin: { x: 52, y: 25 },
+    pin: { x: 52, y: 24 },
     societies: ["International Union of Angiology — Member (1999)"],
   },
   germany: {
     name: "Germany",
     flag: "SVG/Germany.svg",
     continent: "europe",
-    pin: { x: 51, y: 21 },
+    pin: { x: 51, y: 19 },
     societies: ["European Society for Vascular Surgery — Member (2000)"],
   },
   usa: {
