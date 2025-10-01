@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Diabetes Collaboration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="all.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const elements = document.querySelectorAll(
+                ".fade-in, .slide-left, .slide-right, .exchange"
+            );
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("in-view");
+                        observer.unobserve(entry.target); // animate only once
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+
+            elements.forEach(el => observer.observe(el));
+        });
+
+        function playVideoAndRedirect(event, videoFile, url) {
+            event.preventDefault();
+
+            const overlay = document.getElementById("videoOverlay");
+            const video = document.getElementById("navVideo");
+            const source = document.getElementById("videoSource");
+
+            console.log("Loading video:", videoFile);
+
+            source.src = videoFile;
+            video.load();
+            overlay.style.display = "flex";
+
+            video.play().then(() => {
+                console.log("Video started playing.");
+            }).catch(err => {
+                console.error("Video play failed:", err);
+                window.location.href = url; // fallback redirect
+            });
+
+            video.onended = function() {
+                console.log("Video ended, redirecting to:", url);
+                window.location.href = url;
+            };
+        }
+    </script>
+    <link rel="stylesheet" href="nav-footer.css">
+</head>
+
+<body>
+
+     <!-- NAV -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="logo">Prof. M. Sharkawy</div>
+            <!--Added hamburger menu button with three spans for animation -->
+  <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-navigation" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-2.html">About</a></li>
+            <li class="dropdown" tabindex="0">
+                <a href="#" aria-haspopup="true">International Fellowship Programs ▾</a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="kiel.html" onclick="playVideoAndRedirect(event, 'Travel/kiel-new.mp4', this.href)">Kiel</a></li>
+                    <li><a href="koln.html" onclick="playVideoAndRedirect(event, 'Travel/koln.mp4', this.href)">Köln</a></li>
+                    <li><a href="north-wales.html" onclick="playVideoAndRedirect(event, 'Travel/north wales.mp4', this.href)">North Wales</a></li>
+                    <li><a href="chennai-india.html" onclick="playVideoAndRedirect(event, 'Travel/india.mp4', this.href)">Chennai India</a></li>
+                    <li><a href="bergesch.html" onclick="playVideoAndRedirect(event, 'Travel/bergisch.mp4', this.href)">Bergisch Gladbach</a></li>
+                    <li><a href="nancy-lorraine.html" onclick="playVideoAndRedirect(event, 'Travel/nancy.mp4', this.href)">Nancy-Lorraine</a></li>
+                </ul>
+            </li>
+            <li><a href="df-diploma.html">DF Diploma</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>North Wales</h1>
+        <p>Organized by: <strong>Diabetic Foot Salvage Egyptian Foundation & North Wales </strong></p>
+
+        <div class="btn-container">
+            <a href="north-photos.html" class="btn btn-primary">View Gallery</a>
+            <a href="#collab" class="btn btn-secondary">Learn More</a>
+        </div>
+
+        <!-- Video Overlay -->
+        <div id="videoOverlay" style="display:none;">
+            <video id="navVideo" autoplay playsinline muted>
+  <source id="videoSource" src="" type="video/mp4">
+</video>
+        </div>
+
+        <div class="scroll-down">⬇</div>
+    </section>
+    <!-- COLLAB -->
+    <section id="collab" class="collab-section fade-in">
+        <div class="leader-card">
+            <img src="DF Diploma/Laszlo.png" alt="Dr. Laszlo Papp" class="leader-photo">
+            <h3>Prof. Laszlo Papp</h3>
+            <p class="title">Consultant in Vascular Surgery</p>
+            <p class="desc">
+                Professor of Vascular & Endovascular Surgery and Senior Coordinator for International Cooperation & Postgraduate Training</br>
+                Betsi Cadwaladr University Health Board
+                </br> Former Head of Vascular Surgery, University of Debrecen</br>
+                Visiting Professor, Yale University </br> Examiner, European Board of Vascular Surgery (FEBVS) </p>
+            <div class="btn-container">
+                <a href="https://sharkawyfp.com/wp-content/uploads/2023/06/Laszlo-CV-1.pdf" class="btn btn-primary">Prof. Laszlo Papp CV</a>
+            </div>
+        </div>
+
+        <div class="center-symbol">
+            <div class="handshake">🤝</div>
+            <h2 class="project-title">UK-Egypt Surgical Alliance</h2>
+            <p class="project-desc">A clinical partnership between leading vascular surgery units in North Wales, UK, and Cairo University Hospitals, endorsed by the Egyptian Vascular Academy. This initiative focuses on advancing surgical training, research, and patient care
+                through the exchange of expertise.</p>
+        </div>
+
+        <div class="leader-card">
+            <img src="DF Diploma/prof-sharkawy.jpg" alt="Prof. Mohamed Sharkawy" class="leader-photo">
+            <h3>Prof. Mohamed Sharkawy</h3>
+            <p class="title">Professor of Vascular & Endovascular Surgery</p>
+            <p class="desc">
+                Faculty of Medicine – Cairo University.<br> Senior Coordinator for International Cooperation & Postgraduate Training.<br> Dedicated to advancing vascular & endovascular surgery and fostering global academic collaborations.
+            </p>
+            <div class="logo-badge"><img src="DF Diploma/ds_logo.png" alt="Logo 2"></div>
+        </div>
+    </section>
+
+
+    <!--Footer-->
+    <footer class="site-footer">
+        <div class="footer-content">
+
+            <!-- References -->
+            <div class="footer-column reveal">
+                <h3>References</h3>
+                <ul class="footer-list">
+                    <li><a href="https://scholar.cu.edu.eg/?q=misharkawy/publications">Scholar</a></li>
+                    <li><a href="https://orcid.org/0000-0001-6263-2554">Orcid</a></li>
+                    <li><a href="https://www.scopus.com/authid/detail.uri?authorId=57213278598">Scopus</a></li>
+                </ul>
+            </div>
+
+            <!-- Career Highlights -->
+            <div class="footer-column reveal">
+                <h3>Career Highlights</h3>
+                <ul class="footer-list">
+                    <li><strong>Professor of Vascular & Endovascular Surgery</strong><br>Cairo University</li>
+                    <li><strong>Senior Coordinator</strong><br>International Cooperation & Training</li>
+                    <li><strong>Board Member</strong> – Fellowship Programs:
+                        <ul class="sub-list">
+                            <li>BCAGF – Cologne University, Germany</li>
+                            <li>FEIN – Kiel University, Germany</li>
+                            <li>VSF-NW – Betsi Cadwaladr, UK</li>
+                            <li>IDFSF – Chennai, India</li>
+                            <li>GVRF – Bergisch Gladbach, Germany</li>
+                        </ul>
+                    </li>
+                    <li>Chairman – Egyptian Vascular Academy (EVA)</li>
+                    <li>DF International Board Advisor</li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-column reveal">
+                <h3>Contact</h3>
+                <ul class="footer-list">
+                    <li><a href="mailto:sharkawy@kasralainy.edu.eg">sharkawy@kasralainy.edu.eg</a></li>
+                    <li><a href="mailto:kiel@sharkawyfp.com">kiel@sharkawyfp.com</a></li>
+                    <li><a href="mailto:koln@sharkawyfp.com">koln@sharkawyfp.com</a></li>
+                    <li><a href="mailto:info@sharkawyfp.com">info@sharkawyfp.com</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+            <p>© Prof. Mohamed Ibrahim Sharkawy. All Rights Reserved.</p>
+            <p>Design & Development by <a href="#">Adham Wael   Eldeeb</a></p>
+        </div>
+    </footer>
+
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox"><img src="" alt="Preview"></div>
+
+    <!-- BACK TO TOP -->
+    <button id="backToTop">↑</button>
+
+    <!-- JS -->
+                   <script src="universal.js"></script>
+
+    <script>
+        // SCROLL ANIMATIONS
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = {
+            threshold: 0.2,
+            rootMargin: "0px 0px -50px 0px"
+        };
+        const appearOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+        faders.forEach(fader => appearOnScroll.observe(fader));
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const blocks = document.querySelectorAll(".about-block");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("in-view");
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+
+            blocks.forEach(block => observer.observe(block));
+        });
+    </script>
+</body>
+
+</html>

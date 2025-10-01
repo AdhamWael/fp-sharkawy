@@ -1,0 +1,741 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, Arial, sans-serif;
+}
+
+:root {
+  --bg: #f9fcff;
+  --card-bg: #fff;
+  /* Primary theme colors */
+  --primary: #0d47a1;
+  --secondary: #1565c0;
+  --highlight: #66b2ff;
+  --muted: #555;
+  /* Footer / gradients */
+  --footer-gradient-start: #0d47a1;
+  --footer-gradient-end: #1565c0;
+  /* Text / accents */
+  --text-dark: #0d1b2a;
+  --text-body: #2b2d42;
+  --text-link-hover: #bbdefb;
+  --text-light: #cfd8dc;
+  /* Background tints */
+  --bg-light: #e3f2fd;
+  --bg-card-gradient-start: #ffffff;
+  --bg-card-gradient-end: #f3f8ff;
+  /* Shadows & borders */
+  --border-light: #e0e0e0;
+}
+
+/* Body with rem-based padding */
+body {
+  background: var(--bg);
+  color: var(--primary);
+  line-height: 1.5;
+  padding-top: 3.125rem; /* 50px */
+}
+
+/* Navbar with rem units and fluid sizing */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.75rem; /* 12px 28px */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--card-bg);
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08); /* 0 2px 8px */
+  z-index: 100;
+}
+
+/* Logo with clamp for fluid typography */
+.logo {
+  font-size: clamp(1rem, 1.2vw + 0.5rem, 1.375rem); /* 16px - 22px */
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* Nav links with rem-based gap */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.125rem; /* 18px */
+  align-items: center;
+}
+
+/* Nav link text with clamp for fluid sizing */
+.nav-links a {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: clamp(0.875rem, 0.8vw + 0.3rem, 1rem); /* 14px - 16px */
+  transition: .25s;
+}
+
+.nav-links a:hover {
+  color: var(--highlight);
+  transform: translateY(-0.125rem); /* -2px */
+}
+
+.dropdown {
+  position: relative;
+}
+
+/* Dropdown menu with rem units */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--card-bg);
+  border-radius: 0.375rem; /* 6px */
+  box-shadow: 0 0.375rem 0.9375rem rgba(0, 0, 0, 0.12); /* 0 6px 15px */
+  min-width: 12.5rem; /* 200px */
+  padding: 0.375rem 0; /* 6px 0 */
+  list-style: none;
+  z-index: 9999;
+}
+
+/* Dropdown items with rem padding */
+.dropdown-menu li a {
+  display: block;
+  padding: 0.5rem 0.875rem; /* 8px 14px */
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+  background: var(--highlight);
+  color: var(--card-bg);
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown:focus-within .dropdown-menu,
+.dropdown-menu:hover {
+  display: block;
+}
+
+/* Footer with rem-based padding */
+.site-footer {
+  background: linear-gradient(90deg, var(--footer-gradient-start), var(--footer-gradient-end));
+  color: var(--card-bg);
+  padding: 3.125rem 1.25rem 1.25rem; /* 50px 20px 20px */
+  font-family: Inter, Arial, sans-serif;
+}
+
+/* Footer content with rem-based gap and min-width */
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr)); /* 280px */
+  gap: 2.5rem; /* 40px */
+  margin-bottom: 1.875rem; /* 30px */
+}
+
+/* Footer column with rem padding and border-radius */
+.footer-column {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.25rem; /* 20px */
+  border-radius: 0.75rem; /* 12px */
+  box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.15); /* 0 2px 6px */
+  transition: background 0.3s ease;
+}
+
+.footer-column:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Footer headings with clamp for fluid sizing */
+.footer-column h3 {
+  font-size: clamp(0.95rem, 1vw + 0.5rem, 1.3rem); /* 15.2px - 20.8px */
+  margin-bottom: 0.9375rem; /* 15px */
+  border-bottom: 0.125rem solid rgba(255, 255, 255, 0.2); /* 2px */
+  padding-bottom: 0.3125rem; /* 5px */
+  color: var(--bg-light);
+}
+
+.footer-list,
+.sub-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Footer list items with rem spacing */
+.footer-list li {
+  margin-bottom: 0.625rem; /* 10px */
+  line-height: 1.6;
+}
+
+.footer-list a {
+  color: var(--card-bg);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-list a:hover {
+  color: var(--text-link-hover);
+  text-decoration: underline;
+}
+
+/* Sub-list with rem units */
+.sub-list {
+  margin-top: 0.5rem; /* 8px */
+  margin-left: 0.9375rem; /* 15px */
+  font-size: 0.9rem;
+  color: var(--card-bg);
+}
+
+/* Footer bottom with rem padding */
+.footer-bottom {
+  text-align: center;
+  font-size: 0.85rem;
+  border-top: 0.0625rem solid rgba(255, 255, 255, 0.2); /* 1px */
+  padding-top: 0.9375rem; /* 15px */
+  color: var(--text-light);
+}
+
+footer h3 {
+  text-align: center;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.3125rem; /* 5px */
+  flex-direction: column;
+  gap: 0.3125rem; /* 5px */
+  z-index: 101;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 1.5625rem; /* 25px */
+  height: 0.1875rem; /* 3px */
+  background: var(--primary);
+  border-radius: 0.125rem; /* 2px */
+  transition: all 0.3s ease;
+}
+
+/* Hamburger animation when active */
+.nav-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(0.4375rem, 0.4375rem); /* 7px, 7px */
+}
+
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(0.4375rem, -0.4375rem); /* 7px, -7px */
+}
+
+/* Tablet breakpoint with rem units */
+@media (max-width: 64rem) {
+  /* 1024px */
+  .navbar {
+    padding: 0.75rem 1.25rem; /* 12px 20px */
+  }
+
+  .footer-content {
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); /* 240px */
+    gap: 1.875rem; /* 30px */
+  }
+
+  .footer-column {
+    padding: 1.125rem; /* 18px */
+  }
+}
+
+/* Mobile breakpoint with rem units */
+@media (max-width: 48rem) {
+  /* 768px */
+  body {
+    padding-top: 3.75rem; /* 60px */
+  }
+
+  .navbar {
+    padding: 0.625rem 1rem; /* 10px 16px */
+  }
+
+  .logo {
+    font-size: clamp(1rem, 1.5vw + 0.3rem, 1.125rem); /* 16px - 18px */
+  }
+
+  /* Show hamburger menu on mobile */
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: var(--card-bg);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.25rem; /* 20px */
+    box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.15); /* 0 5px 15px */
+    gap: 0.75rem; /* 12px */
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a {
+    font-size: clamp(0.875rem, 1vw + 0.3rem, 0.9375rem); /* 14px - 15px */
+    padding: 0.5rem 0; /* 8px 0 */
+  }
+
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    background: var(--bg-light);
+    margin-top: 0.5rem; /* 8px */
+    border-radius: 0.25rem; /* 4px */
+  }
+
+  .site-footer {
+    padding: 2.5rem 1rem 1rem; /* 40px 16px 16px */
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem; /* 24px */
+  }
+
+  .footer-column {
+    padding: 1rem; /* 16px */
+  }
+
+  .footer-column h3 {
+    font-size: clamp(0.9rem, 1.2vw + 0.4rem, 1.1rem); /* 14.4px - 17.6px */
+  }
+
+  .footer-list li {
+    margin-bottom: 0.5rem; /* 8px */
+  }
+
+  .sub-list {
+    margin-left: 0.75rem; /* 12px */
+    font-size: 0.85rem;
+  }
+}
+
+/* Small mobile breakpoint with rem units */
+@media (max-width: 30rem) {
+  /* 480px */
+  body {
+    padding-top: 3.4375rem; /* 55px */
+  }
+
+  .navbar {
+    padding: 0.5rem 0.75rem; /* 8px 12px */
+  }
+
+  .logo {
+    font-size: clamp(0.9rem, 1.8vw + 0.2rem, 1rem); /* 14.4px - 16px */
+  }
+
+  .nav-links {
+    padding: 1rem; /* 16px */
+  }
+
+  .nav-links a {
+    font-size: clamp(0.8rem, 1.2vw + 0.2rem, 0.875rem); /* 12.8px - 14px */
+  }
+
+  .site-footer {
+    padding: 1.875rem 0.75rem 0.75rem; /* 30px 12px 12px */
+  }
+
+  .footer-column {
+    padding: 0.875rem; /* 14px */
+  }
+
+  .footer-column h3 {
+    font-size: clamp(0.85rem, 1.5vw + 0.3rem, 0.95rem); /* 13.6px - 15.2px */
+  }
+
+  .footer-list a {
+    font-size: 0.85rem;
+  }
+
+  .footer-bottom {
+    font-size: 0.75rem;
+  }
+}
+
+/* Large desktop breakpoint with rem units and fluid sizing */
+@media (min-width: 75rem) {
+  /* 1200px */
+  .navbar {
+    padding: 1rem 2.5rem; /* 16px 40px */
+  }
+
+  .logo {
+    font-size: clamp(1.375rem, 1.2vw + 0.8rem, 1.625rem); /* 22px - 26px */
+  }
+
+  .nav-links {
+    gap: 1.5rem; /* 24px */
+  }
+
+  .nav-links a {
+    font-size: clamp(1rem, 0.8vw + 0.5rem, 1.125rem); /* 16px - 18px */
+  }
+
+  .dropdown-menu {
+    min-width: 15rem; /* 240px */
+    padding: 0.625rem 0; /* 10px 0 */
+  }
+
+  .dropdown-menu li a {
+    padding: 0.625rem 1.125rem; /* 10px 18px */
+    font-size: clamp(1rem, 0.8vw + 0.4rem, 1.0625rem); /* 16px - 17px */
+  }
+
+  .site-footer {
+    padding: 3.75rem 2.5rem 1.5rem; /* 60px 40px 24px */
+  }
+
+  .footer-content {
+    max-width: 87.5rem; /* 1400px */
+    margin: 0 auto 2.5rem; /* 40px */
+    gap: 3.125rem; /* 50px */
+  }
+
+  .footer-column {
+    padding: 1.5rem; /* 24px */
+  }
+
+  .footer-column h3 {
+    font-size: clamp(1.3rem, 1.2vw + 0.8rem, 1.5rem); /* 20.8px - 24px */
+    margin-bottom: 1.125rem; /* 18px */
+  }
+
+  .footer-list li {
+    margin-bottom: 0.75rem; /* 12px */
+    font-size: 1.05rem;
+  }
+
+  .sub-list {
+    font-size: 0.95rem;
+    margin-left: 1.125rem; /* 18px */
+  }
+
+  .footer-bottom {
+    font-size: 0.9rem;
+    max-width: 87.5rem; /* 1400px */
+    margin: 0 auto;
+  }
+}
+
+/* Extra large desktop breakpoint with rem units */
+@media (min-width: 90rem) {
+  /* 1440px */
+  .navbar {
+    padding: 1.125rem 3.75rem; /* 18px 60px */
+  }
+
+  .logo {
+    font-size: clamp(1.625rem, 1.3vw + 0.9rem, 1.75rem); /* 26px - 28px */
+  }
+
+  .nav-links {
+    gap: 1.75rem; /* 28px */
+  }
+
+  .nav-links a {
+    font-size: clamp(1.125rem, 0.9vw + 0.6rem, 1.1875rem); /* 18px - 19px */
+  }
+
+  .dropdown-menu {
+    min-width: 16.25rem; /* 260px */
+  }
+
+  .dropdown-menu li a {
+    font-size: clamp(1.0625rem, 0.9vw + 0.5rem, 1.125rem); /* 17px - 18px */
+  }
+
+  .site-footer {
+    padding: 4.375rem 3.75rem 1.75rem; /* 70px 60px 28px */
+  }
+
+  .footer-content {
+    max-width: 100rem; /* 1600px */
+    gap: 3.75rem; /* 60px */
+  }
+
+  .footer-column {
+    padding: 1.75rem; /* 28px */
+  }
+
+  .footer-column h3 {
+    font-size: clamp(1.5rem, 1.3vw + 0.9rem, 1.6rem); /* 24px - 25.6px */
+    margin-bottom: 1.25rem; /* 20px */
+  }
+
+  .footer-list li {
+    font-size: 1.1rem;
+  }
+
+  .sub-list {
+    font-size: 1rem;
+  }
+}
+
+/* 1700px breakpoint with rem units and fluid sizing */
+@media (min-width: 106.25rem) {
+  /* 1700px */
+  .navbar {
+    padding: 1.125rem 4.375rem; /* 18px 70px */
+  }
+
+  .logo {
+    font-size: clamp(1.75rem, 1.4vw + 1rem, 1.875rem); /* 28px - 30px */
+  }
+
+  .nav-links {
+    gap: 1.875rem; /* 30px */
+  }
+
+  .nav-links a {
+    font-size: clamp(1.1875rem, 1vw + 0.7rem, 1.25rem); /* 19px - 20px */
+  }
+
+  .dropdown-menu {
+    min-width: 16.875rem; /* 270px */
+    padding: 0.75rem 0; /* 12px 0 */
+  }
+
+  .dropdown-menu li a {
+    padding: 0.75rem 1.25rem; /* 12px 20px */
+    font-size: clamp(1.125rem, 1vw + 0.6rem, 1.1875rem); /* 18px - 19px */
+  }
+
+  .site-footer {
+    padding: 4.6875rem 4.375rem 1.875rem; /* 75px 70px 30px */
+  }
+
+  .footer-content {
+    max-width: 106.25rem; /* 1700px */
+    gap: 4.0625rem; /* 65px */
+  }
+
+  .footer-column {
+    padding: 1.875rem; /* 30px */
+  }
+
+  .footer-column h3 {
+    font-size: clamp(1.6rem, 1.4vw + 1rem, 1.65rem); /* 25.6px - 26.4px */
+    margin-bottom: 1.3125rem; /* 21px */
+  }
+
+  .footer-list li {
+    margin-bottom: 0.8125rem; /* 13px */
+    font-size: 1.12rem;
+  }
+
+  .sub-list {
+    font-size: 1.02rem;
+    margin-left: 1.25rem; /* 20px */
+  }
+
+  .footer-bottom {
+    font-size: 0.92rem;
+  }
+}
+
+/* Ultra-wide screens breakpoint with rem units */
+@media (min-width: 120rem) {
+  /* 1920px */
+  .navbar {
+    padding: 1.25rem 5rem; /* 20px 80px */
+  }
+
+  .logo {
+    font-size: clamp(1.875rem, 1.5vw + 1.1rem, 2rem); /* 30px - 32px */
+  }
+
+  .nav-links {
+    gap: 2rem; /* 32px */
+  }
+
+  .nav-links a {
+    font-size: clamp(1.25rem, 1.1vw + 0.8rem, 1.25rem); /* 20px */
+  }
+
+  .dropdown-menu {
+    min-width: 17.5rem; /* 280px */
+    padding: 0.75rem 0; /* 12px 0 */
+  }
+
+  .dropdown-menu li a {
+    padding: 0.75rem 1.25rem; /* 12px 20px */
+    font-size: clamp(1.1875rem, 1.1vw + 0.7rem, 1.1875rem); /* 19px */
+  }
+
+  .site-footer {
+    padding: 5rem 5rem 2rem; /* 80px 80px 32px */
+  }
+
+  .footer-content {
+    max-width: 112.5rem; /* 1800px */
+    gap: 4.375rem; /* 70px */
+  }
+
+  .footer-column {
+    padding: 2rem; /* 32px */
+  }
+
+  .footer-column h3 {
+    font-size: clamp(1.65rem, 1.5vw + 1.1rem, 1.75rem); /* 26.4px - 28px */
+    margin-bottom: 1.375rem; /* 22px */
+  }
+
+  .footer-list li {
+    margin-bottom: 0.875rem; /* 14px */
+    font-size: 1.15rem;
+  }
+
+  .sub-list {
+    font-size: 1.05rem;
+    margin-left: 1.25rem; /* 20px */
+  }
+
+  .footer-bottom {
+    font-size: 0.95rem;
+  }
+}
+
+/* 2500px breakpoint for extremely large screens */
+@media (min-width: 156.25rem) {
+  /* 2500px */
+  .navbar {
+    padding: 1.5rem 6.25rem; /* 24px 100px */
+  }
+
+  .logo {
+    font-size: clamp(2rem, 1.6vw + 1.3rem, 2.25rem); /* 32px - 36px */
+  }
+
+  .nav-links {
+    gap: 2.5rem; /* 40px */
+  }
+
+  .nav-links a {
+    font-size: clamp(1.375rem, 1.2vw + 0.9rem, 1.5rem); /* 22px - 24px */
+  }
+
+  .dropdown-menu {
+    min-width: 20rem; /* 320px */
+    padding: 1rem 0; /* 16px 0 */
+  }
+
+  .dropdown-menu li a {
+    padding: 0.875rem 1.5rem; /* 14px 24px */
+    font-size: clamp(1.25rem, 1.2vw + 0.8rem, 1.375rem); /* 20px - 22px */
+  }
+
+  .site-footer {
+    padding: 6.25rem 6.25rem 2.5rem; /* 100px 100px 40px */
+  }
+
+  .footer-content {
+    max-width: 125rem; /* 2000px */
+    gap: 5rem; /* 80px */
+  }
+
+  .footer-column {
+    padding: 2.5rem; /* 40px */
+  }
+
+  .footer-column h3 {
+    font-size: clamp(1.875rem, 1.6vw + 1.2rem, 2rem); /* 30px - 32px */
+    margin-bottom: 1.5rem; /* 24px */
+  }
+
+  .footer-list li {
+    margin-bottom: 1rem; /* 16px */
+    font-size: 1.25rem;
+  }
+
+  .sub-list {
+    font-size: 1.15rem;
+    margin-left: 1.5rem; /* 24px */
+  }
+
+  .footer-bottom {
+    font-size: 1.05rem;
+  }
+}
+
+/* 3000px breakpoint for ultra-wide screens */
+@media (min-width: 187.5rem) {
+  /* 3000px */
+  .navbar {
+    padding: 1.875rem 7.5rem; /* 30px 120px */
+  }
+
+  .logo {
+    font-size: clamp(2.25rem, 1.8vw + 1.5rem, 2.5rem); /* 36px - 40px */
+  }
+
+  .nav-links {
+    gap: 3rem; /* 48px */
+  }
+
+  .nav-links a {
+    font-size: clamp(1.5rem, 1.4vw + 1rem, 1.75rem); /* 24px - 28px */
+  }
+
+  .dropdown-menu {
+    min-width: 22.5rem; /* 360px */
+    padding: 1.25rem 0; /* 20px 0 */
+  }
+
+  .dropdown-menu li a {
+    padding: 1rem 1.75rem; /* 16px 28px */
+    font-size: clamp(1.375rem, 1.4vw + 0.9rem, 1.5rem); /* 22px - 24px */
+  }
+
+  .site-footer {
+    padding: 7.5rem 7.5rem 3rem; /* 120px 120px 48px */
+  }
+
+  .footer-content {
+    max-width: 150rem; /* 2400px */
+    gap: 6.25rem; /* 100px */
+  }
+
+  .footer-column {
+    padding: 3rem; /* 48px */
+  }
+
+  .footer-column h3 {
+    font-size: clamp(2rem, 1.8vw + 1.4rem, 2.25rem); /* 32px - 36px */
+    margin-bottom: 1.75rem; /* 28px */
+  }
+
+  .footer-list li {
+    margin-bottom: 1.25rem; /* 20px */
+    font-size: 1.4rem;
+  }
+
+  .sub-list {
+    font-size: 1.3rem;
+    margin-left: 1.75rem; /* 28px */
+  }
+
+  .footer-bottom {
+    font-size: 1.15rem;
+  }
+}

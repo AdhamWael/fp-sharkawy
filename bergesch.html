@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Diabetes Collaboration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const elements = document.querySelectorAll(
+                ".fade-in, .slide-left, .slide-right, .exchange"
+            );
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("in-view");
+                        observer.unobserve(entry.target); // animate only once
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+
+            elements.forEach(el => observer.observe(el));
+        });
+
+        function playVideoAndRedirect(event, videoFile, url) {
+            event.preventDefault();
+
+            const overlay = document.getElementById("videoOverlay");
+            const video = document.getElementById("navVideo");
+            const source = document.getElementById("videoSource");
+
+            console.log("Loading video:", videoFile);
+
+            source.src = videoFile;
+            video.load();
+            overlay.style.display = "flex";
+
+            video.play().then(() => {
+                console.log("Video started playing.");
+            }).catch(err => {
+                console.error("Video play failed:", err);
+                window.location.href = url; // fallback redirect
+            });
+
+            video.onended = function() {
+                console.log("Video ended, redirecting to:", url);
+                window.location.href = url;
+            };
+        }
+    </script>
+    <link rel="stylesheet" href="nav-footer.css">
+    <link rel="stylesheet" href="all.css">
+
+
+</head>
+
+<body>
+
+      <!-- NAV -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="logo">Prof. M. Sharkawy</div>
+            <!--Added hamburger menu button with three spans for animation -->
+  <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-navigation" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-2.html">About</a></li>
+            <li class="dropdown" tabindex="0">
+                <a href="#" aria-haspopup="true">International Fellowship Programs ▾</a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="kiel.html" onclick="playVideoAndRedirect(event, 'Travel/kiel-new.mp4', this.href)">Kiel</a></li>
+                    <li><a href="koln.html" onclick="playVideoAndRedirect(event, 'Travel/koln.mp4', this.href)">Köln</a></li>
+                    <li><a href="north-wales.html" onclick="playVideoAndRedirect(event, 'Travel/north wales.mp4', this.href)">North Wales</a></li>
+                    <li><a href="chennai-india.html" onclick="playVideoAndRedirect(event, 'Travel/india.mp4', this.href)">Chennai India</a></li>
+                    <li><a href="bergesch.html" onclick="playVideoAndRedirect(event, 'Travel/bergisch.mp4', this.href)">Bergisch Gladbach</a></li>
+                    <li><a href="nancy-lorraine.html" onclick="playVideoAndRedirect(event, 'Travel/nancy.mp4', this.href)">Nancy-Lorraine</a></li>
+                </ul>
+            </li>
+            <li><a href="df-diploma.html">DF Diploma</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    </div>
+    <section class="hero">
+        <h1>Bergisch Gladbach</h1>
+        <p>Organized by: <strong>Diabetic Foot Salvage Egyptian Foundation & Bergisch Gladbach</strong></p>
+
+        <div class="btn-container">
+            <a href="bergisch-photos.html" class="btn btn-primary">View Gallery</a>
+            <a href="#collab" class="btn btn-secondary">Learn More</a>
+        </div>
+
+        <div class="scroll-down">⬇</div>
+    </section>
+
+    <!-- Video Overlay -->
+    <div id="videoOverlay" style="display:none;">
+        <video id="navVideo" autoplay playsinline muted>
+  <source id="videoSource" src="" type="video/mp4">
+</video>
+    </div>
+
+    <!-- COLLAB -->
+    <section id="collab" class="collab-section fade-in">
+        <div class="leader-card">
+            <img src="DF Diploma/dr payman.jpg" alt="Dr. Laszlo Papp" class="leader-photo">
+            <h3>PD Dr. med. Mir Payman Majd</h3>
+            <p class="title">Head of Vascular & Endovascular Surgery</p>
+            <p class="desc">
+                German vascular surgeon with extensive experience in open and endovascular procedures.</br> Head of Department at EVK Bergisch Gladbach and senior lecturer at the University of Cologne.</br> Author of 25+ peer-reviewed publications on
+                aortic aneurysms, carotid disease, and endovascular techniques.
+            </p>
+            <div class="btn-container">
+                <a href="https://sharkawyfp.com/wp-content/uploads/2023/06/Majd-CV-1.pdf" class="btn btn-primary">Professor Dr Payman Majd CV</a>
+            </div>
+        </div>
+
+        <div class="center-symbol">
+            <div class="handshake">🤝</div>
+            <h2 class="project-title">German-Egyptian Vascular Collaboration</h2>
+            <p class="project-desc">A knowledge-exchange initiative where leading vascular surgeons from Egypt collaborate with Professor Payman Majd's team in Germany to elevate medical training, develop innovative treatments, and improve patient outcomes.</p>
+        </div>
+
+        <div class="leader-card">
+            <img src="DF Diploma/prof-sharkawy.jpg" alt="Prof. Mohamed Sharkawy" class="leader-photo">
+            <h3>Prof. Mohamed Sharkawy</h3>
+            <p class="title">Professor of Vascular & Endovascular Surgery</p>
+            <p class="desc">
+                Faculty of Medicine – Cairo University.<br><br> Senior Coordinator for International Cooperation & Postgraduate Training.<br> Dedicated to advancing vascular & endovascular surgery and fostering global academic collaborations.
+            </p>
+            <div class="logo-badge"><img src="DF Diploma/ds_logo.png" alt="Logo 2"></div>
+        </div>
+    </section>
+
+    <!-- MESSAGE -->
+    <section class="board-section">
+        <div class="board-message">
+            <h2 class="titleh2">Message from the Board</h2>
+
+            <p>
+                We are delighted to inform you about a remarkable collaboration between Vascular Surgery Department-Evangelical Hospital in Bergisch Gladbach, as an academic hospital affiliated with the University of Cologne headed by Professor Payman Majd & Vascular
+                Surgery Departments in whole Egyptian hospitals mainly Cairo university hospitals.</br>
+                </br>
+                This cooperation is created and endorsed by “Egyptian Vascular Academy (EVA)” presented by Professor M. Sharkawy. This innovative program allows the vascular surgeons to benefit from the expertise and knowledge of the vascular surgeons in Bergisch Gladbach-
+                Germany.
+                </br>
+                </br>
+                The aim of this collaboration is to enhance the training and education of vascular surgeons, providing them with the opportunity to learn from international best practices. Through the exchange of knowledge, experiences and surgical techniques, the vascular
+                surgeons are empowered to deliver exceptional care to their patients.
+                </br>
+                </br> The Evangelical Hospital in Bergisch Gladbach boasts a renowned Vascular Surgery Department, affiliated with the University of Cologne as an academic hospital. The experts in Bergisch Gladbach are highly qualified and possess vast experience
+                in vascular surgery Headed by a great Scientist Vascular Sugeon & Pioneer interventionist Professor Payman </br>
+                </br>
+
+                The exchange between the Vascular Surgery Department in whole Egypt, specially Cairo University and the Vascular Surgery Department at the Evangelical Hospital in Bergisch Gladbach is a significant step towards promoting global collaboration and enhancing
+                medical care in the field of vascular surgery. By exchanging experiences and working together on research projects, new insights are gained, and innovative treatment methods are developed. </br>
+                </br>
+                This collaboration serves as an outstanding example of how cross-border cooperation and the exchange of medical expertise can elevate patient care to a higher level. We take pride in the joint efforts of the Vascular Surgery Department at Cairo University
+                and the Vascular Surgery Department at the Evangelical Hospital in Bergisch Gladbach to continuously improve medical care in the field of vascular surgery.
+                </br>
+                </br>We are confident that this collaboration will continue to enable vascular surgeons from both institutions to expand their knowledge and enhance their skills. Ultimately, it is the patients who benefit from highly qualified and advanced
+                care in the field of vascular surgery.</p>
+            <div style="display: flex;">
+                <img src="DF Diploma/dr payman signature.png" width="150px" height="100px " ">
+                <img src="DF Diploma/prof sharkawy sign.png " width="100px " height="80px ">
+            </div>
+
+        </div>
+    </section>
+
+    <!--Footer-->
+    <footer class="site-footer ">
+        <div class="footer-content ">
+
+            <!-- References -->
+            <div class="footer-column reveal ">
+                <h3>References</h3>
+                <ul class="footer-list ">
+                    <li><a href="https://scholar.cu.edu.eg/?q=misharkawy/publications ">Scholar</a></li>
+                    <li><a href="https://orcid.org/0000-0001-6263-2554 ">Orcid</a></li>
+                    <li><a href="https://www.scopus.com/authid/detail.uri?authorId=57213278598 ">Scopus</a></li>
+                </ul>
+            </div>
+
+            <!-- Career Highlights -->
+            <div class="footer-column reveal ">
+                <h3>Career Highlights</h3>
+                <ul class="footer-list ">
+                    <li><strong>Professor of Vascular & Endovascular Surgery</strong><br>Cairo University</li>
+                    <li><strong>Senior Coordinator</strong><br>International Cooperation & Training</li>
+                    <li><strong>Board Member</strong> – Fellowship Programs:
+                        <ul class="sub-list ">
+                            <li>BCAGF – Cologne University, Germany</li>
+                            <li>FEIN – Kiel University, Germany</li>
+                            <li>VSF-NW – Betsi Cadwaladr, UK</li>
+                            <li>IDFSF – Chennai, India</li>
+                            <li>GVRF – Bergisch Gladbach, Germany</li>
+                        </ul>
+                    </li>
+                    <li>Chairman – Egyptian Vascular Academy (EVA)</li>
+                    <li>DF International Board Advisor</li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-column reveal ">
+                <h3>Contact</h3>
+                <ul class="footer-list ">
+                    <li><a href="mailto:sharkawy@kasralainy.edu.eg ">sharkawy@kasralainy.edu.eg</a></li>
+                    <li><a href="mailto:kiel@sharkawyfp.com ">kiel@sharkawyfp.com</a></li>
+                    <li><a href="mailto:koln@sharkawyfp.com ">koln@sharkawyfp.com</a></li>
+                    <li><a href="mailto:info@sharkawyfp.com ">info@sharkawyfp.com</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom ">
+            <p>© Prof. Mohamed Ibrahim Sharkawy. All Rights Reserved.</p>
+            <p>Design & Development by <a href="# ">Adham Wael   Eldeeb</a></p>
+        </div>
+    </footer>
+
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox " id="lightbox "><img src=" " alt="Preview "></div>
+
+    <!-- BACK TO TOP -->
+    <button id="backToTop ">↑</button>
+
+    <!-- JS -->
+         <script src="universal.js"></script>
+
+    <script>
+ 
+        // SCROLL ANIMATIONS
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = {
+            threshold: 0.2,
+            rootMargin: "0px 0px -50px 0px "
+        };
+        const appearOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+        faders.forEach(fader => appearOnScroll.observe(fader));
+
+        document.addEventListener("DOMContentLoaded ", () => {
+            const blocks = document.querySelectorAll(".about-block ");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("in-view ");
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+
+            blocks.forEach(block => observer.observe(block));
+        });
+    </script>
+</body>
+
+</html>

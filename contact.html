@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Prof. M. Sharkawy</title>
+    <link rel="stylesheet" href="nav-footer.css">
+    <style>
+        /* RESET */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Inter, Arial, sans-serif;
+        }
+        
+        body {
+            line-height: 1.5;
+        }
+        
+         :root {
+            --indigo-dye: #133c55ff;
+            --bice-blue: #386fa4ff;
+            --picton-blue: #59a5d8ff;
+            --carrot-orange: #f18f01ff;
+            --white: #ffffffff;
+            --bg: #f9fcff;
+            --bg-light: #f9fbfd;
+            --text-light: #fff;
+            --text-dark: #133c55;
+            --heading: #1565c0;
+            --highlight: #59a5d8;
+            --white: #fff;
+            --primary: #1565c0
+        }
+        /* Animation */
+        
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(10px);
+            }
+            60% {
+                transform: translateY(5px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .btn {
+                font-size: 0.95rem;
+                padding: 0.8rem 1.6rem;
+            }
+            .scroll-down {
+                font-size: 1.4rem;
+            }
+        }
+        /* Mobile Responsive */
+        
+        @media (max-width: 768px) {
+            .hero {
+                height: 70vh;
+                padding: 40px 20px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        /* ===== Section Title ===== */
+        
+        .contact-header {
+            text-align: center;
+            margin: 80px 20px 40px;
+        }
+        
+        .contact-header h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .contact-header p {
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+        /* ===== Contact Section Layout ===== */
+        
+        .contact-section {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        /* ===== Left Column ===== */
+        
+        .contact-left {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        /* ===== Form ===== */
+        
+        .contact-form {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-form h3 {
+            color: var(--heading);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--primary);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            font-size: 1rem;
+            background: #fff;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--highlight);
+            box-shadow: 0 0 0 3px rgba(102, 178, 255, 0.2);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+        
+        .btn-submit {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+        
+        .btn-submit:hover {
+            background: var(--secondary);
+            transform: scale(1.05);
+        }
+        /* ===== Map ===== */
+        
+        .map-container {
+            border-radius: 14px;
+            overflow: hidden;
+            border: 2px solid var(--border-light);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+            height: 100%;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            border: none;
+        }
+        /* ===== Contact Cards ===== */
+        
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 3rem auto;
+            max-width: 1100px;
+        }
+        
+        .action-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-decoration: none;
+            background: #fff;
+            color: #222;
+            text-align: center;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        
+        .action-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .action-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .action-card h3 {
+            margin-bottom: 0.25rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .action-card p {
+            font-size: 0.95rem;
+            color: #333;
+            margin-bottom: 0.4rem;
+        }
+        
+        .action-card small {
+            font-size: 0.8rem;
+            color: #777;
+        }
+        /* ===== Responsive ===== */
+        
+        @media (max-width: 900px) {
+            .contact-section {
+                grid-template-columns: 1fr;
+            }
+            .map-container {
+                min-height: 350px;
+            }
+            .contact-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="all.css">
+</head>
+
+<body>
+     <!-- NAV -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="logo">Prof. M. Sharkawy</div>
+            <!--Added hamburger menu button with three spans for animation -->
+  <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-navigation" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-2.html">About</a></li>
+            <li class="dropdown" tabindex="0">
+                <a href="#" aria-haspopup="true">International Fellowship Programs ▾</a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="kiel.html" onclick="playVideoAndRedirect(event, 'Travel/kiel-new.mp4', this.href)">Kiel</a></li>
+                    <li><a href="koln.html" onclick="playVideoAndRedirect(event, 'Travel/koln.mp4', this.href)">Köln</a></li>
+                    <li><a href="north-wales.html" onclick="playVideoAndRedirect(event, 'Travel/north wales.mp4', this.href)">North Wales</a></li>
+                    <li><a href="chennai-india.html" onclick="playVideoAndRedirect(event, 'Travel/india.mp4', this.href)">Chennai India</a></li>
+                    <li><a href="bergesch.html" onclick="playVideoAndRedirect(event, 'Travel/bergisch.mp4', this.href)">Bergisch Gladbach</a></li>
+                    <li><a href="nancy-lorraine.html" onclick="playVideoAndRedirect(event, 'Travel/nancy.mp4', this.href)">Nancy-Lorraine</a></li>
+                </ul>
+            </li>
+            <li><a href="df-diploma.html">DF Diploma</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Let’s Connect</h1>
+        <p>Whether you have a question, want to collaborate, or simply say hello — Prof. Sharkawy is here to listen.</p>
+        <div class="btn-container">
+            <a href="#contact-form" class="btn btn-primary">Send a Message</a>
+            <a href="#map" class="btn btn-secondary">Find My Office</a>
+        </div>
+        <div class="scroll-down">⬇</div>
+    </section>
+    <!-- Video Overlay -->
+    <div id="videoOverlay" style="display:none;">
+        <video id="navVideo" autoplay playsinline muted>
+  <source id="videoSource" src="" type="video/mp4">
+</video>
+    </div>
+
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+
+        <!-- Left Column: Map -->
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.636304108615!2d31.243365800000003!3d30.047290299999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840bece178241%3A0xb9a7689e177232f0!2s11%20Gawad%20Housny%2C%20Al%20Fawalah%2C%20Abdeen%2C%20Cairo%20Governorate%204280143%2C%20Egypt!5e0!3m2!1sen!2sfr!4v1759050243824!5m2!1sen!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <!-- Right Column -->
+        <div class="contact-left">
+            <!-- Contact Form -->
+            <div class="contact-form" id="contact-form">
+                <h3>Send a Message</h3>
+                <form id="emailForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="from_name" placeholder="Your name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="from_email" placeholder="Your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Send Message</button>
+                </form>
+                <p id="form-status" style="margin-top:10px; font-weight:600;"></p>
+            </div>
+
+        </div>
+
+
+    </section>
+
+    <!-- Action Cards -->
+    <div class="contact-cards">
+        <!-- Email Card -->
+        <a href="mailto:professor@example.com" class="action-card">
+            <div class="icon">✉️</div>
+            <h3>Email</h3>
+            <p>Sharkawy@kasralainy.edu.eg</p>
+            <p>sharkawy54@yahoo.com</p>
+            <small>Replies within 24 hours</small>
+        </a>
+
+        <!-- Phone Card -->
+        <a href="tel:+20123456789" class="action-card">
+            <div class="icon">📞</div>
+            <h3>Phone</h3>
+            <p>+201223623122</p>
+            <p>+201115755152</p>
+            <p>+0223911136</p>
+            <small>Available Sun–Thu, 9am–5pm</small>
+        </a>
+
+        <!-- Office Card -->
+        <a href="https://maps.google.com?q=Cairo+University,+Egypt" target="_blank" class="action-card">
+            <div class="icon">📍</div>
+            <h3>Office</h3>
+            <p>Abdeen,Cairo, Egypt</p>
+            <small>11 Gawad Housny, Al Fawalah</small>
+        </a>
+    </div>
+
+    <!--Footer-->
+    <footer class="site-footer">
+        <div class="footer-content">
+
+            <!-- References -->
+            <div class="footer-column reveal">
+                <h3>References</h3>
+                <ul class="footer-list">
+                    <li><a href="https://scholar.cu.edu.eg/?q=misharkawy/publications">Scholar</a></li>
+                    <li><a href="https://orcid.org/0000-0001-6263-2554">Orcid</a></li>
+                    <li><a href="https://www.scopus.com/authid/detail.uri?authorId=57213278598">Scopus</a></li>
+                </ul>
+            </div>
+
+            <!-- Career Highlights -->
+            <div class="footer-column reveal">
+                <h3>Career Highlights</h3>
+                <ul class="footer-list">
+                    <li><strong>Professor of Vascular & Endovascular Surgery</strong><br>Cairo University</li>
+                    <li><strong>Senior Coordinator</strong><br>International Cooperation & Training</li>
+                    <li><strong>Board Member</strong> – Fellowship Programs:
+                        <ul class="sub-list">
+                            <li>BCAGF – Cologne University, Germany</li>
+                            <li>FEIN – Kiel University, Germany</li>
+                            <li>VSF-NW – Betsi Cadwaladr, UK</li>
+                            <li>IDFSF – Chennai, India</li>
+                            <li>GVRF – Bergisch Gladbach, Germany</li>
+                        </ul>
+                    </li>
+                    <li>Chairman – Egyptian Vascular Academy (EVA)</li>
+                    <li>DF International Board Advisor</li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-column reveal">
+                <h3>Contact</h3>
+                <ul class="footer-list">
+                    <li><a href="mailto:sharkawy@kasralainy.edu.eg">sharkawy@kasralainy.edu.eg</a></li>
+                    <li><a href="mailto:kiel@sharkawyfp.com">kiel@sharkawyfp.com</a></li>
+                    <li><a href="mailto:koln@sharkawyfp.com">koln@sharkawyfp.com</a></li>
+                    <li><a href="mailto:info@sharkawyfp.com">info@sharkawyfp.com</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+            <p>© Prof. Mohamed Ibrahim Sharkawy. All Rights Reserved.</p>
+            <p>Design & Development by <a href="#">Adham Wael   Eldeeb</a></p>
+        </div>
+    </footer>
+
+    <!-- EmailJS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script src="universal.js"></script>
+
+    <script>
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your Public Key
+        })();
+
+        document.getElementById('emailForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+                .then(function() {
+                    document.getElementById('form-status').style.color = "green";
+                    document.getElementById('form-status').textContent = "✅ Message sent successfully!";
+                }, function(error) {
+                    document.getElementById('form-status').style.color = "red";
+                    document.getElementById('form-status').textContent = "❌ Failed to send. Please try again.";
+                    console.error("EmailJS error:", error);
+                });
+        });
+
+        
+    </script>
+
+</body>
+
+</html>

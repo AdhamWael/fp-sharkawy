@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stacking Cards Scroll - Achievements</title>
+  <style>
+   @import url('https://fonts.googleapis.com/css2?family=Rakkas&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+    --card-height: 50vw;
+    --card-margin: 4vw;
+    --card-top-offset: 1em;
+    --numcards: 6;
+
+    /* Modern palette */
+    --indigo-dye: #133c55ff;
+    --bice-blue: #386fa4ff;
+    --picton-blue: #59a5d8ff;
+    --carrot-orange: #f18f01ff;
+    --white: #ffffffff;
+    --bg: #f9fcff;
+    --bg-light: #f9fbfd;
+    --text-light: #fff;
+    --text-dark: #133c55;
+    --heading2: #1565c0;
+    --highlight: #59a5d8;
+    --primary: #1565c0;
+
+    /* Card-specific colors */
+    --card-bg: var(--bg-light);
+    --heading-color: var(--heading2);
+    --text-color: var(--text-dark);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Rubik', Arial, sans-serif;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text-dark);
+}
+
+#cards-honored {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(var(--numcards), var(--card-height));
+    gap: var(--card-margin);
+    padding: 2em;
+    padding-bottom: calc(var(--numcards) * var(--card-top-offset));
+    margin-bottom: var(--card-margin);
+}
+
+.card-honored {
+    position: sticky;
+    top:0;
+    padding-top: var(--card-top-offset);
+    transform-origin: 50% 0%;
+    will-change: transform;
+    border-radius: 1em;
+    overflow: hidden;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.card__content-honored {
+    display: grid;
+    grid-template-areas: "text img";
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    background: var(--card-bg);
+    border-radius: 1em;
+    padding: 4em;
+    gap: 1em;
+    box-shadow: 0 0.5em 1.5em rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+}
+
+.card__content-honored > div {
+    grid-area: text;
+    width: 90%;
+    display: grid;
+    gap: 0.5em;
+    place-items: start;
+}
+
+.card__content-honored h3 {
+    font-family: Inter, Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.2rem, 2vw, 1.8em);
+    color: var(--heading-color);
+    margin-bottom: 0.3em;
+    letter-spacing: 0.03125rem;
+}
+
+.card__content-honored p {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+    font-size: clamp(0.875rem, 1.2vw, 1em);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.card__content-honored .images-honored {
+    grid-area: img;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1em;
+}
+
+.card__content-honored .images-honored img {
+    width: 12.5rem;
+    height: 12.5rem;
+    object-fit: cover;
+    border-radius: 0.5em;
+    box-shadow: 0 0.2em 0.5em rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card__content-honored .images-honored img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0.4em 1em rgba(0,0,0,0.12);
+}
+
+.wall {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.frame {
+    position: relative;
+    background: #fdf8f2; 
+    border: 0.75rem solid #8b5e3c;
+    border-radius: 0.75rem;
+    padding: 0.5rem;
+    width: 15.625rem;
+    box-shadow: 0 0.625rem 1.5625rem rgba(0,0,0,0.35), inset 0 0 0.5rem rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.frame.horizontal { 
+    width: 20rem; 
+}
+
+.frame img {
+    display: block;
+    width: 100%;
+    border-radius: 0.375rem;
+}
+
+.frame::before {
+    content: '';
+    position: absolute;
+    top: -1.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0.125rem;
+    height: 1.75rem;
+    background: #555;
+}
+
+.frame:hover { 
+    transform: scale(1.08); 
+    box-shadow: 0 0.9375rem 2.1875rem rgba(0,0,0,0.45), inset 0 0 0.625rem rgba(0,0,0,0.15);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left:0; 
+    top:0;
+    width:100%; 
+    height:100%;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.modal-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
+.modal-close {
+    position: absolute;
+    top: 0.625rem;
+    right: 0.9375rem;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+}
+
+#lightbox {
+  display: none; 
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: center;
+  cursor: zoom-out;
+  overflow: auto; 
+  padding: 1em;
+}
+
+#lightbox.show {
+  display: flex;
+  opacity: 1;
+  width: 100%;
+}
+
+#lightbox img {
+  max-width: 80%;
+  max-height: 80%;
+  width: auto;
+  height: auto;
+  border-radius: 0.75rem;
+  box-shadow: 0 0.625rem 1.875rem rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
+  transform: scale(1);
+}
+
+#lightbox img:hover {
+  transform: scale(1.1);
+}
+
+/* Adding comprehensive responsive breakpoints for all screen sizes */
+
+/* Extra small screens (360px) */
+@media (max-width: 22.5rem) {
+    :root {
+        --card-height: 70vw;
+        --card-margin: 2vw;
+        --card-top-offset: 0.5em;
+    }
+    
+    .card__content-honored {
+        grid-template-areas: "img" "text";
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+        font-size: 0.875rem;
+        gap: 1rem;
+    }
+    
+    .card__content-honored > div {
+        width: 100%;
+    }
+    
+    .card__content-honored h3 {
+        font-size: 1.1rem;
+    }
+    
+    .card__content-honored p {
+        font-size: 0.8rem;
+        line-height: 1.5;
+    }
+    
+    .card__content-honored .images-honored {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+    
+    .card__content-honored .images-honored img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1;
+    }
+    
+    .wall {
+        gap: 2rem;
+        padding: 1rem;
+    }
+    
+    .frame {
+        width: 10rem;
+        border-width: 0.5rem;
+        padding: 0.375rem;
+    }
+    
+    .frame.horizontal {
+        width: 13rem;
+    }
+    
+    .frame::before {
+        top: -1.25rem;
+        height: 1.25rem;
+    }
+    
+    #lightbox img {
+        max-width: 95%;
+        max-height: 95%;
+    }
+    
+    .modal-content {
+        max-width: 95%;
+        max-height: 95%;
+    }
+}
+
+/* Small screens (480px) */
+@media (max-width: 30rem) {
+    :root {
+        --card-height: 65vw;
+        --card-margin: 3vw;
+        --card-top-offset: 0.75em;
+    }
+    
+    .card__content-honored {
+        grid-template-areas: "img" "text";
+        grid-template-columns: 1fr;
+        padding: 2rem;
+        font-size: 1rem;
+        gap: 1.25rem;
+    }
+    
+    .card__content-honored > div {
+        width: 100%;
+    }
+    
+    .card__content-honored h3 {
+        font-size: 1.3rem;
+    }
+    
+    .card__content-honored p {
+        font-size: 0.9rem;
+    }
+    
+    .card__content-honored .images-honored {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    
+    .card__content-honored .images-honored img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1;
+    }
+    
+    .wall {
+        gap: 2.5rem;
+        padding: 1.5rem;
+    }
+    
+    .frame {
+        width: 11.25rem;
+        border-width: 0.625rem;
+    }
+    
+    .frame.horizontal {
+        width: 15rem;
+    }
+}
+
+/* Medium screens (768px) */
+@media (max-width: 48rem) {
+    :root {
+        --card-height: 55vw;
+        --card-margin: 3.5vw;
+    }
+    
+    .card__content-honored {
+        grid-template-areas: "img" "text";
+        grid-template-columns: 1fr;
+        padding: 2.5rem;
+        gap: 1.5rem;
+    }
+    
+    .card__content-honored > div {
+        width: 100%;
+    }
+    
+    .card__content-honored h3 {
+        font-size: 1.5rem;
+    }
+    
+    .card__content-honored p {
+        font-size: 1rem;
+    }
+    
+    .card__content-honored .images-honored {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .card__content-honored .images-honored img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1;
+    }
+    
+    .wall {
+        gap: 3rem;
+    }
+    
+    .frame {
+        width: 11.25rem;
+    }
+    
+    .frame.horizontal {
+        width: 15rem;
+    }
+}
+
+/* Large screens (1024px) */
+@media (min-width: 64rem) {
+    :root {
+        --card-height: 45vw;
+        --card-margin: 4.5vw;
+    }
+    
+    .card__content-honored {
+        padding: 4.5rem;
+        gap: 1.5rem;
+    }
+    
+    .card__content-honored h3 {
+        font-size: 2rem;
+    }
+    
+    .card__content-honored p {
+        font-size: 1.1rem;
+    }
+    
+    .card__content-honored .images-honored img {
+        width: 13.75rem;
+        height: 13.75rem;
+    }
+    
+    .wall {
+        gap: 4.5rem;
+    }
+    
+    .frame {
+        width: 17.5rem;
+    }
+    
+    .frame.horizontal {
+        width: 22.5rem;
+    }
+}
+
+/* Extra large screens (1700px) */
+@media (min-width: 106.25rem) {
+    :root {
+        --card-height: 40vw;
+        --card-margin: 5vw;
+    }
+    
+    #cards-honored {
+        padding: 3rem;
+    }
+    
+    .card__content-honored {
+        padding: 5rem;
+        gap: 2rem;
+        font-size: 1.75rem;
+    }
+    
+    .card__content-honored h3 {
+        font-size: 2.5rem;
+        letter-spacing: 0.0625rem;
+    }
+    
+    .card__content-honored p {
+        font-size: 1.3rem;
+        line-height: 1.7;
+    }
+    
+    .card__content-honored .images-honored {
+        gap: 1.5rem;
+    }
+    
+    .card__content-honored .images-honored img {
+        width: 16.25rem;
+        height: 16.25rem;
+        border-radius: 0.75rem;
+    }
+    
+    .wall {
+        gap: 5rem;
+    }
+    
+    .frame {
+        width: 20rem;
+        border-width: 0.875rem;
+        padding: 0.625rem;
+    }
+    
+    .frame.horizontal {
+        width: 26rem;
+    }
+    
+    .frame::before {
+        top: -2rem;
+        height: 2rem;
+        width: 0.1875rem;
+    }
+    
+    #lightbox img {
+        max-width: 75%;
+        max-height: 75%;
+        border-radius: 1rem;
+    }
+    
+    .modal-close {
+        font-size: 2.5rem;
+        top: 1rem;
+        right: 1.5rem;
+    }
+}
+
+/* Ultra large screens (2500px) */
+@media (min-width: 156.25rem) {
+    :root {
+        --card-height: 35vw;
+        --card-margin: 5.5vw;
+    }
+    
+    #cards-honored {
+        padding: 4rem;
+    }
+    
+    .card__content-honored {
+        padding: 6rem;
+        gap: 2.5rem;
+        font-size: 2rem;
+        border-radius: 1.5rem;
+    }
+    
+    .card__content-honored h3 {
+        font-size: 3rem;
+        letter-spacing: 0.09375rem;
+    }
+    
+    .card__content-honored p {
+        font-size: 1.6rem;
+        line-height: 1.8;
+    }
+    
+    .card__content-honored .images-honored {
+        gap: 2rem;
+    }
+    
+    .card__content-honored .images-honored img {
+        width: 20rem;
+        height: 20rem;
+        border-radius: 1rem;
+    }
+    
+    .wall {
+        gap: 6rem;
+    }
+    
+    .frame {
+        width: 25rem;
+        border-width: 1rem;
+        padding: 0.75rem;
+        border-radius: 1rem;
+    }
+    
+    .frame.horizontal {
+        width: 32rem;
+    }
+    
+    .frame::before {
+        top: -2.5rem;
+        height: 2.5rem;
+        width: 0.25rem;
+    }
+    
+    #lightbox img {
+        max-width: 70%;
+        max-height: 70%;
+        border-radius: 1.25rem;
+    }
+    
+    .modal-close {
+        font-size: 3rem;
+        top: 1.5rem;
+        right: 2rem;
+    }
+}
+
+/* Extreme large screens (3000px) */
+@media (min-width: 187.5rem) {
+    :root {
+        --card-height: 30vw;
+        --card-margin: 6vw;
+    }
+    
+    #cards-honored {
+        padding: 5rem;
+    }
+    
+    .card__content-honored {
+        padding: 7rem;
+        gap: 3rem;
+        font-size: 2.25rem;
+        border-radius: 2rem;
+    }
+    
+    .card__content-honored h3 {
+        font-size: 3.5rem;
+        letter-spacing: 0.125rem;
+    }
+    
+    .card__content-honored p {
+        font-size: 1.9rem;
+        line-height: 1.9;
+    }
+    
+    .card__content-honored .images-honored {
+        gap: 2.5rem;
+    }
+    
+    .card__content-honored .images-honored img {
+        width: 23.75rem;
+        height: 23.75rem;
+        border-radius: 1.25rem;
+    }
+    
+    .wall {
+        gap: 7rem;
+    }
+    
+    .frame {
+        width: 30rem;
+        border-width: 1.25rem;
+        padding: 1rem;
+        border-radius: 1.25rem;
+    }
+    
+    .frame.horizontal {
+        width: 38rem;
+    }
+    
+    .frame::before {
+        top: -3rem;
+        height: 3rem;
+        width: 0.3125rem;
+    }
+    
+    #lightbox img {
+        max-width: 65%;
+        max-height: 65%;
+        border-radius: 1.5rem;
+    }
+    
+    .modal-close {
+        font-size: 3.5rem;
+        top: 2rem;
+        right: 2.5rem;
+    }
+}
+
+/* Touch device hover adjustments */
+@media (hover: none) and (pointer: coarse) {
+    .card__content-honored .images-honored img:hover,
+    .frame:hover {
+        transform: none;
+        box-shadow: inherit;
+    }
+}
+
+  </style>  
+<link rel="stylesheet" href="all.css">
+ <link rel="stylesheet" href="nav-footer.css">
+</head>
+
+<body>
+    <!-- NAV -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="logo">Prof. M. Sharkawy</div>
+            <!--Added hamburger menu button with three spans for animation -->
+  <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-navigation" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-2.html">About</a></li>
+            <li class="dropdown" tabindex="0">
+                <a href="#" aria-haspopup="true">International Fellowship Programs ▾</a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="kiel.html" onclick="playVideoAndRedirect(event, 'Travel/kiel-new.mp4', this.href)">Kiel</a></li>
+                    <li><a href="koln.html" onclick="playVideoAndRedirect(event, 'Travel/koln.mp4', this.href)">Köln</a></li>
+                    <li><a href="north-wales.html" onclick="playVideoAndRedirect(event, 'Travel/north wales.mp4', this.href)">North Wales</a></li>
+                    <li><a href="chennai-india.html" onclick="playVideoAndRedirect(event, 'Travel/india.mp4', this.href)">Chennai India</a></li>
+                    <li><a href="bergesch.html" onclick="playVideoAndRedirect(event, 'Travel/bergisch.mp4', this.href)">Bergisch Gladbach</a></li>
+                    <li><a href="nancy-lorraine.html" onclick="playVideoAndRedirect(event, 'Travel/nancy.mp4', this.href)">Nancy-Lorraine</a></li>
+                </ul>
+            </li>
+            <li><a href="df-diploma.html">DF Diploma</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>About</h1>
+        <div class="btn-container">
+            <a href="#gallery" class="btn btn-primary">View Gallery</a>
+            <a href="another-page.html" class="btn btn-secondary">Learn More</a>
+        </div>
+        <div class="scroll-down">⬇</div>
+    </section>
+
+    <!-- Video Overlay -->
+    <div id="videoOverlay" style="display:none;">
+        <video id="navVideo" autoplay playsinline muted>
+  <source id="videoSource" src="" type="video/mp4">
+</video>
+    </div>
+<section>
+    <h2>Achievements</h2>
+<main>
+  <ul id="cards-honored">
+    <li class="card-honored">
+      <div class="card__content-honored">
+        <div>
+          <h3>Honored in China</h3>
+          <p>Recognized for exceptional contributions and excellence during international events held in China.</p>
+        </div>
+        <div class="images-honored">
+          <img src="about/china1.jpeg" alt="">
+          <img src="about/china2.jpeg" alt="">
+          <img src="about/china3.jpeg" alt="">
+          <img src="about/china4.jpeg" alt="">
+        </div>
+      </div>
+    </li>
+    <li class="card-honored">
+      <div class="card__content-honored">
+        <div>
+          <h3>Honored in Dubai</h3>
+          <p>Received accolades for outstanding achievements at events hosted in Dubai.</p>
+        </div>
+        <div class="images-honored">
+          <img src="about/dubai1.jpg" alt="">
+          <img src="about/dubai2.jpg" alt="">
+          <img src="about/dubai3.jpg" alt="">
+          <img src="about/dubai4.jpg" alt="">
+        </div>
+      </div>
+    </li>
+    <li class="card-honored">
+      <div class="card__content-honored">
+        <div>
+          <h3>Honored in Bani Sweif</h3>
+          <p>Recognized for remarkable achievements at regional events in Bani Sweif.</p>
+        </div>
+        <div class="images-honored">
+          <img src="about/elSweif1.jpeg" alt="">
+          <img src="about/elSweif2.jpeg" alt="">
+          <img src="about/elSweif3.jpeg" alt="">
+          <img src="about/elSweif4.jpeg" alt="">
+        </div>
+      </div>
+    </li>
+    <li class="card-honored">
+      <div class="card__content-honored">
+        <div>
+          <h3>Prizes</h3>
+          <p>A showcase of awards earned across multiple competitions and categories.</p>
+        </div>
+        <div class="images-honored">
+          <img src="about/Prize1.jpg" alt="">
+          <img src="about/prize2.jpg" alt="">
+          <img src="about/Prize3.jpg" alt="">
+          <img src="about/Prize4.jpg" alt="">
+        </div>
+      </div>
+    </li>
+    <li class="card-honored">
+      <div class="card__content-honored">
+        <div>
+          <h3>Shields in Egypt</h3>
+          <p>Honored with prestigious shields for outstanding contributions within Egypt.</p>
+        </div>
+        <div class="images-honored">
+          <img src="about/se1.jpeg" alt="">
+          <img src="about/se2.png" alt="">
+          <img src="about/se3.png" alt="">
+          <img src="about/se4.png" alt="">
+        </div>
+      </div>
+    </li>
+    <li class="card-honored">
+      <div class="card__content-honored">
+        <div>
+          <h3>Shields International</h3>
+          <p>International recognition through awards and shields for excellence and dedication.</p>
+        </div>
+        <div class="images-honored">
+          <img src="about/si1.png" alt="">
+          <img src="about/si2.png" alt="">
+          <img src="about/si3.jpg" alt="">
+          <img src="about/si1.png" alt="">
+        </div>
+      </div>
+    </li>
+  </ul>
+</main>
+</section>
+
+<section>
+<h2>My Certificate Gallery Wall</h2>
+<div class="wall">
+   <!--12 Vertical Certificates -->
+  <div class="frame"><img src="certificates/cert-vertical1.png" alt=""></div>
+  <div class="frame"><img src="certificates/cert-vertical2.png" alt=""></div>
+  <div class="frame"><img src="certificates/cert-vertical3.png" alt=""></div>
+  <div class="frame"><img src="certificates/cert-vertical4.png" alt=""></div>
+  <div class="frame"><img src="certificates/cert-vertical5.jpg" alt=""></div>
+  <div class="frame"><img src="certificates/cert-vertical6.png" alt=""></div>
+  <div class="frame"><img src="certificates/cert-vertical7.png" alt=""></div>
+  <div class="frame"><img src="certificates/cert-vertical8.jpg" alt=""></div>
+  <div class="frame"><img src="certificates/cert-vertical9.jpg" alt=""></div>
+  <div class="frame"><img src="certificates/cert-vertical10.jpg" alt=""></div>
+  <div class="frame"><img src="certificates/cert-vertical11.jpg" alt=""></div>
+  <div class="frame"><img src="certificates/cert-vertical12.jpg" alt=""></div>
+
+   <!--6 Horizontal Certificates -->
+  <div class="frame horizontal"><img src="certificates/cert-horizontal1.png" alt=""></div>
+  <div class="frame horizontal"><img src="certificates/cert-horizontal2.jpg" alt=""></div>
+  <div class="frame horizontal"><img src="certificates/cert-horizontal3.png" alt=""></div>
+  <div class="frame horizontal"><img src="certificates/cert-horizontal4.png" alt=""></div>
+  <div class="frame horizontal"><img src="certificates/cert-horizontal5.png" alt=""></div>
+  <div class="frame horizontal"><img src="certificates/cert-horizontal6.jpg" alt=""></div>
+</div>
+
+ <!--Modal for full-size certificate -->
+<div class="modal" id="modal">
+  <span class="modal-close" id="modal-close">&times;</span>
+  <div class="modal-content">
+    <img src="/placeholder.svg" id="modal-img">
+  </div>
+</div>
+</section>
+ LIGHTBOX 
+<div class="lightbox" id="lightbox"><img src="/placeholder.svg" alt="Preview"></div>
+
+ BACK TO TOP 
+<button id="backToTop">↑</button>
+  <!--Footer-->
+    <footer class="site-footer ">
+        <div class="footer-content ">
+
+            <!-- References -->
+            <div class="footer-column reveal ">
+                <h3>References</h3>
+                <ul class="footer-list ">
+                    <li><a href="https://scholar.cu.edu.eg/?q=misharkawy/publications ">Scholar</a></li>
+                    <li><a href="https://orcid.org/0000-0001-6263-2554 ">Orcid</a></li>
+                    <li><a href="https://www.scopus.com/authid/detail.uri?authorId=57213278598 ">Scopus</a></li>
+                </ul>
+            </div>
+
+            <!-- Career Highlights -->
+            <div class="footer-column reveal ">
+                <h3>Career Highlights</h3>
+                <ul class="footer-list ">
+                    <li><strong>Professor of Vascular & Endovascular Surgery</strong><br>Cairo University</li>
+                    <li><strong>Senior Coordinator</strong><br>International Cooperation & Training</li>
+                    <li><strong>Board Member</strong> – Fellowship Programs:
+                        <ul class="sub-list ">
+                            <li>BCAGF – Cologne University, Germany</li>
+                            <li>FEIN – Kiel University, Germany</li>
+                            <li>VSF-NW – Betsi Cadwaladr, UK</li>
+                            <li>IDFSF – Chennai, India</li>
+                            <li>GVRF – Bergisch Gladbach, Germany</li>
+                        </ul>
+                    </li>
+                    <li>Chairman – Egyptian Vascular Academy (EVA)</li>
+                    <li>DF International Board Advisor</li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-column reveal ">
+                <h3>Contact</h3>
+                <ul class="footer-list ">
+                    <li><a href="mailto:sharkawy@kasralainy.edu.eg ">sharkawy@kasralainy.edu.eg</a></li>
+                    <li><a href="mailto:kiel@sharkawyfp.com ">kiel@sharkawyfp.com</a></li>
+                    <li><a href="mailto:koln@sharkawyfp.com ">koln@sharkawyfp.com</a></li>
+                    <li><a href="mailto:info@sharkawyfp.com ">info@sharkawyfp.com</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom ">
+            <p>© Prof. Mohamed Ibrahim Sharkawy. All Rights Reserved.</p>
+            <p>Design & Development by <a href="# ">Adham Wael   Eldeeb</a></p>
+        </div>
+    </footer>
+    <script src="universal.js"></script>
+    <script>
+  // --- MODAL for CERTIFICATES ---
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modal-img');
+  const modalClose = document.getElementById('modal-close');
+
+  document.querySelectorAll('.frame img').forEach(img => {
+    img.addEventListener('click', () => {
+      modal.style.display = 'flex';
+      modalImg.src = img.src;
+    });
+  });
+
+  modalClose.addEventListener('click', () => modal.style.display = 'none');
+  modal.addEventListener('click', e => {
+    if (e.target === modal) modal.style.display = 'none';
+  });
+
+  // --- BACK TO TOP ---
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  function playVideoAndRedirect(event, videoFile, url) {
+            event.preventDefault();
+
+            const overlay = document.getElementById("videoOverlay");
+            const video = document.getElementById("navVideo");
+            const source = document.getElementById("videoSource");
+
+            console.log("Loading video:", videoFile);
+
+            source.src = videoFile;
+            video.load();
+            overlay.style.display = "flex";
+
+            video.play().then(() => {
+                console.log("Video started playing.");
+            }).catch(err => {
+                console.error("Video play failed:", err);
+                window.location.href = url; // fallback redirect
+            });
+
+            video.onended = function() {
+                console.log("Video ended, redirecting to:", url);
+                window.location.href = url;
+            };
+        }
+</script>
+
+
+    <script type="module">
+  import { scroll, animate } from "https://cdn.skypack.dev/motion@10.13.1"
+
+  const $cardsWrapper = document.querySelector('#cards-honored');
+  const $cards = document.querySelectorAll('.card-honored');
+  const numCards = $cards.length;
+
+  $cards.forEach(($card, index0) => {
+    const index = index0 + 1;
+    const reverseIndex0 = numCards - index;
+
+    // optional: offset top spacing
+    $card.style.paddingTop = `calc(${index} * var(--card-top-offset))`;
+
+    scroll(
+      animate($card, {
+        scale: [1, 1 - (0.08 * reverseIndex0)],
+        opacity: [1, 0.5 + 0.08 * reverseIndex0],
+        y: [0, reverseIndex0 * 30] // optional vertical movement for stacking effect
+      }),
+      {
+        target: $cardsWrapper,
+        offset: [`${index0 / numCards * 100}%`, `${index / numCards * 100}%`],
+      }
+    );
+  });
+</script>
+
+
+</body>
+</html>
