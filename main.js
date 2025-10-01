@@ -269,3 +269,10 @@ if (navToggle) {
     navLinks.classList.toggle("active")
   })
 }
+
+
+    // Hide loader when page is fully loaded
+    window.addEventListener("load", () => {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("content").style.display = "block";
+    });
