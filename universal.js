@@ -16,63 +16,7 @@ const navToggle = document.querySelector('.nav-toggle');
 
     applyResponsiveStyles();
 
-// Lightbox functionality
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightbox-img");
-    const closeBtn = document.querySelector(".lightbox .close");
-    const nextBtn = document.querySelector(".lightbox .next");
-    const prevBtn = document.querySelector(".lightbox .prev");
-
-    let currentIndex = 0;
-    let images = [];
-
-    function openLightbox(index) {
-      currentIndex = index;
-      lightbox.style.display = "flex";
-      lightboxImg.src = images[currentIndex].src;
-    }
-
-    function closeLightbox() {
-      lightbox.style.display = "none";
-    }
-
-    function nextImage() {
-      currentIndex = (currentIndex + 1) % images.length;
-      lightboxImg.src = images[currentIndex].src;
-    }
-
-    function prevImage() {
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      lightboxImg.src = images[currentIndex].src;
-    }
-
-    // Gather all images
-    window.onload = () => {
-      images = document.querySelectorAll(".album img");
-      images.forEach((img, index) => {
-        img.addEventListener("click", () => openLightbox(index));
-      });
-    };
-
-    closeBtn.addEventListener("click", closeLightbox);
-    nextBtn.addEventListener("click", nextImage);
-    prevBtn.addEventListener("click", prevImage);
-
-    // Close on click outside image
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
-
-    // Keyboard navigation
-    document.addEventListener("keydown", (e) => {
-      if (lightbox.style.display === "flex") {
-        if (e.key === "ArrowRight") nextImage();
-        if (e.key === "ArrowLeft") prevImage();
-        if (e.key === "Escape") closeLightbox();
-      }
-    });
-
-
+    
         function playVideoAndRedirect(event, videoFile, url) {
             event.preventDefault();
 
