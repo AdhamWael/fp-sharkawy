@@ -207,7 +207,7 @@ section h2::after {
   display: block;
   width: 4.375rem;
   height: 0.25rem;
-  background: #fff;
+  background: #00897b;
   margin: 0.75rem auto 0;
   border-radius: 0.125rem;
 }
