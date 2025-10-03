@@ -124,6 +124,9 @@ body {
   color: var(--card-bg);
   padding: 3.125rem 1.25rem 1.25rem; /* 50px 20px 20px */
   font-family: Inter, Arial, sans-serif;
+  margin: -20px;
+    margin-top: 20px;
+
 }
 
 /* Footer content with rem-based gap and min-width */

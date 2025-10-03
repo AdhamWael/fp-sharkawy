@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Album with Lightbox</title>
+  <title>Nancy-Lorraine Certificate</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,6 +14,7 @@
 
     h1 {
       text-align: center;
+      font-size: 3rem;
       margin: 30px 0 20px;
     }
 
@@ -68,11 +69,48 @@
     .lightbox .close { top: 20px; right: 30px; }
     .lightbox .prev { left: 30px; top: 50%; transform: translateY(-50%); }
     .lightbox .next { right: 30px; top: 50%; transform: translateY(-50%); }
+    /* BACK TO TOP */
+#backToTop {
+  position: fixed;
+  bottom: 1.5625rem;
+  right: 1.5625rem;
+  background: #1565c0;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0.1875rem 0.5rem rgba(0, 0, 0, 0.3);
+  display: none;
+  z-index: 1500;
+  font-size: 1.2rem;
+}
+
+/* Converted all px to rem units */
+#videoOverlay {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 10000;
+}
+
+#videoOverlay video {
+  width: 100%;
+  height: 90%;
+  border-radius: 0.75rem;
+  box-shadow: 0 0 1.875rem rgba(0, 0, 0, 0.6);
+}
   </style>
       <link rel="stylesheet" href="nav-footer.css">
 
 </head>
 <body>
+  
      <!-- NAV -->
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="logo">Prof. M. Sharkawy</div>
@@ -100,49 +138,50 @@
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
-  
+
+        <!-- Video Overlay -->
+    <div id="videoOverlay" style="display:none;">
+        <video id="navVideo" autoplay playsinline muted>
+  <source id="videoSource" src="" type="video/mp4">
+</video>
+    </div>
   <!-- CERTIFICATES -->
   <section id="certificates" class="fade-in">
     <h1>Certificates</h1>
     <div class="album" id="certificates-container"></div>
   </section>
 
-  <!-- GALLERY -->
-  <section id="gallery" class="fade-in">
-    <h1>Gallery</h1>
-    <div class="album" id="gallery-container"></div>
-  </section>
 
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox">
+  <div id="lightbox" class="lightbox">
     <span class="close">&times;</span>
-    <span class="prev">&#10094;</span>
     <img id="lightbox-img" src="">
+    <span class="prev">&#10094;</span>
     <span class="next">&#10095;</span>
   </div>
 
-    <!--Footer-->
-    <footer class="site-footer">
-        <div class="footer-content">
+<button id="backToTop">↑</button>
+  <!--Footer-->
+    <footer class="site-footer ">
+        <div class="footer-content ">
 
             <!-- References -->
-            <div class="footer-column reveal">
+            <div class="footer-column reveal ">
                 <h3>References</h3>
-                <ul class="footer-list">
-                    <li><a href="https://scholar.cu.edu.eg/?q=misharkawy/publications">Scholar</a></li>
-                    <li><a href="https://orcid.org/0000-0001-6263-2554">Orcid</a></li>
-                    <li><a href="https://www.scopus.com/authid/detail.uri?authorId=57213278598">Scopus</a></li>
+                <ul class="footer-list ">
+                    <li><a href="https://scholar.cu.edu.eg/?q=misharkawy/publications ">Scholar</a></li>
+                    <li><a href="https://orcid.org/0000-0001-6263-2554 ">Orcid</a></li>
+                    <li><a href="https://www.scopus.com/authid/detail.uri?authorId=57213278598 ">Scopus</a></li>
                 </ul>
             </div>
 
             <!-- Career Highlights -->
-            <div class="footer-column reveal">
+            <div class="footer-column reveal ">
                 <h3>Career Highlights</h3>
-                <ul class="footer-list">
+                <ul class="footer-list ">
                     <li><strong>Professor of Vascular & Endovascular Surgery</strong><br>Cairo University</li>
                     <li><strong>Senior Coordinator</strong><br>International Cooperation & Training</li>
                     <li><strong>Board Member</strong> – Fellowship Programs:
-                        <ul class="sub-list">
+                        <ul class="sub-list ">
                             <li>BCAGF – Cologne University, Germany</li>
                             <li>FEIN – Kiel University, Germany</li>
                             <li>VSF-NW – Betsi Cadwaladr, UK</li>
@@ -156,29 +195,116 @@
             </div>
 
             <!-- Contact -->
-            <div class="footer-column reveal">
+            <div class="footer-column reveal ">
                 <h3>Contact</h3>
-                <ul class="footer-list">
-                    <li><a href="mailto:sharkawy@kasralainy.edu.eg">sharkawy@kasralainy.edu.eg</a></li>
-                    <li><a href="mailto:kiel@sharkawyfp.com">kiel@sharkawyfp.com</a></li>
-                    <li><a href="mailto:koln@sharkawyfp.com">koln@sharkawyfp.com</a></li>
-                    <li><a href="mailto:info@sharkawyfp.com">info@sharkawyfp.com</a></li>
+                <ul class="footer-list ">
+                    <li><a href="mailto:sharkawy@kasralainy.edu.eg ">sharkawy@kasralainy.edu.eg</a></li>
+                    <li><a href="mailto:kiel@sharkawyfp.com ">kiel@sharkawyfp.com</a></li>
+                    <li><a href="mailto:koln@sharkawyfp.com ">koln@sharkawyfp.com</a></li>
+                    <li><a href="mailto:info@sharkawyfp.com ">info@sharkawyfp.com</a></li>
                 </ul>
             </div>
 
         </div>
 
         <!-- Bottom Bar -->
-        <div class="footer-bottom">
+        <div class="footer-bottom ">
             <p>© Prof. Mohamed Ibrahim Sharkawy. All Rights Reserved.</p>
-            <p>Design & Development by <a href="#">Adham Wael   Eldeeb</a></p>
+            <p>Design & Development by <a href="# ">Adham Wael   Eldeeb</a></p>
         </div>
     </footer>
+    <script src="universal.js"></script>
+    <script>//lightbox
+const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const closeBtn = document.querySelector(".lightbox .close");
+    const nextBtn = document.querySelector(".lightbox .next");
+    const prevBtn = document.querySelector(".lightbox .prev");
 
-  <script src="universal.js">
-  </script>
+    let currentIndex = 0;
+    let images = [];
 
-  <script>
+    function openLightbox(index) {
+      currentIndex = index;
+      lightbox.style.display = "flex";
+      lightboxImg.src = images[currentIndex].src;
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = "none";
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+    }
+
+    window.addEventListener("load", () => {
+      images = Array.from(document.querySelectorAll("img")).filter(img => !img.closest(".lightbox"));
+      console.log("Found", images.length, "images");
+
+      images.forEach((img, index) => {
+        img.addEventListener("click", () => openLightbox(index));
+      });
+    });
+
+    closeBtn.addEventListener("click", closeLightbox);
+    nextBtn.addEventListener("click", nextImage);
+    prevBtn.addEventListener("click", prevImage);
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (lightbox.style.display === "flex") {
+        if (e.key === "ArrowRight") nextImage();
+        if (e.key === "ArrowLeft") prevImage();
+        if (e.key === "Escape") closeLightbox();
+      }
+    });
+
+  // --- BACK TO TOP ---
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  function playVideoAndRedirect(event, videoFile, url) {
+            event.preventDefault();
+
+            const overlay = document.getElementById("videoOverlay");
+            const video = document.getElementById("navVideo");
+            const source = document.getElementById("videoSource");
+
+            console.log("Loading video:", videoFile);
+
+            source.src = videoFile;
+            video.load();
+            overlay.style.display = "flex";
+
+            video.play().then(() => {
+                console.log("Video started playing.");
+            }).catch(err => {
+                console.error("Video play failed:", err);
+                window.location.href = url; // fallback redirect
+            });
+
+            video.onended = function() {
+                console.log("Video ended, redirecting to:", url);
+                window.location.href = url;
+            };
+        }
+
         // Load Certificates
     const certificates = document.getElementById("certificates-container");
     for (let i = 1; i <= 11; i++) {
@@ -187,17 +313,6 @@
       img.loading = "lazy";
       certificates.appendChild(img);
     }
-
-    // Load Gallery
-    const gallery = document.getElementById("gallery-container");
-    for (let i = 1; i <= 7  ; i++) {
-      const img = document.createElement("img");
-      img.src = `ITF Gallery & Certificates/Nancy/Gallery/${i}.jpg`;
-      img.loading = "lazy";
-      gallery.appendChild(img);
-    }
-
-    
   </script>
 </body>
 </html>

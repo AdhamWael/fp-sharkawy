@@ -512,33 +512,6 @@ section h2::after {
   gap: 1.25rem;
 }
 
-/* CERTIFICATES + GALLERY */
-.certificates,
-.gallery {
-  background: #fff;
-  text-align: center;
-}
-
-.slider {
-  display: flex;
-  overflow-x: auto;
-  gap: 1.25rem;
-  scroll-snap-type: x mandatory;
-  padding: 0.625rem;
-}
-
-.slide {
-  flex: 0 0 clamp(15.625rem, 40vw, 18.75rem);
-  scroll-snap-align: start;
-}
-
-.slide img {
-  width: 100%;
-  border-radius: 0.75rem;
-  box-shadow: 0 0.1875rem 0.5rem rgba(0, 0, 0, 0.15);
-  cursor: pointer;
-}
-
     /* Lightbox */
     .lightbox {
       display: none;
